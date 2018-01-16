@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="关键词">
+	<meta name="description" content="描述">
+	<title>玄武音乐播放器</title>
+	<link rel="stylesheet" type="text/css" href="xuanwu/css/xuanwu.css">
+	<script src="xuanwu/js/data.js"></script>
+	<script src="xuanwu/js/music.js"></script>
+</head>
+<body><!--身体-->
+	<canvas id="bgCanvas"></canvas>
+	<div class="music">
+		<h1 class="title">音乐播放器</h1>
+		<div class="main">
+			<div class="m_spectrum">
+				<h2>音乐旋律</h2>
+				<div class="m_sing">
+					<p id="m_gm">海阔天空</p>
+					<p id="m_singer">Beyond</p>
+					<div id="m_star"><img src="xuanwu/images/1.jpg"></div>
+					<canvas id="canvas" width="400" height="200"></canvas>
+				</div>
+			</div>
+			<div class="m_lyric">
+				<h2>歌词展示</h2>
+				<div class="content"><div id="lrcCon"></div></div>
+			</div>
+			<div class="m_list">
+				<h2>歌曲列表</h2>
+				<ul>
+					<li>海阔天空</li>
+					<li>泡沫</li>
+					<li>我懂了</li>
+					<li>特别的爱给特别的你</li>
+					<li>半壶纱</li>
+				</ul>
+			</div>
+			<a id="menu" href="javascript:void(0);"></a>
+		</div>
+		<div class="control">
+			<div class="con1">
+				<a href="javascript:void(0);" id="pre"></a>
+				<a href="javascript:void(0);" id="play"></a>
+				<a href="javascript:void(0);" id="next"></a>
+			</div>
+			<div class="con2">
+				<div class="sound" style="margin: 0 30px 0 10px;">
+					<a href="javascript:void(0);" class="sound_have" id="wp_mute"></a>
+					<p class="grayp"></p>
+					<p class="bluep" id="wp_volProcess">
+						<span id="wp_volBar" style="width:38px;"></span>
+						<a href="javascript:void(0);" class="kongzhia" id="wp_volBtn"></a>
+					</p>
+				</div>
+				<div class="jindu">
+					<var id="wp_playTime">00:00</var>
+					<div class="jindu2" style="width: 354px;">
+						<p class="grayp2" style="width: 354px;"></p>
+						<p class="grayp3" style="width: 354px;" id="wp_bufBar"></p>
+						<p class="bluep2" id="wp_process" style="cursor: pointer;width: 354px;">
+							<span id="wp_processBar"></span>
+							<a href="javascript:void(0);" class="kongzhia" id="wp_processBtn"></a>
+						</p>
+					</div>
+					<var id="wp_totalTime">00:00</var>
+				</div>
+			</div>
+		</div>
+	</div>
+    <audio autoplay="autopaly" id="audio">
+        <source src="xuanwu/audio/1.mp3" type="audio/mp3" />
+    </audio>
+	<!-- <audio src="xuanwu/audio/1.mp3" id="audio"></audio> -->
+	<script src="xuanwu/js/canvasBg.js"></script>
+</body>
+</html>

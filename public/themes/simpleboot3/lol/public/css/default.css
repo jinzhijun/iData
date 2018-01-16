@@ -1,0 +1,58 @@
+@charset "utf-8";
+/* CSS Document */
+/** 
+ * 描述：重置页面元素，设置布局样式及公共模块
+ * 作用范围：公共
+ * hover 会继承上一个元素的属性
+*/
+*{margin:0;padding:0;border:0;}
+html,body {
+	font: 14px/1.5 "microsoft yahei", Helvetica, Tahoma, Arial, "Microsoft jhengHei", sans-serif;
+	color:#FFF;
+	background-color:#000;
+}
+a{text-decoration:none;color: #FFF;}
+a:hover{text-decoration:underline;color:#FFED6D;}
+img{border:0 none;max-width: 100%;}
+ol,ul{list-style:none;}
+div,span,ul,li{ overflow:hidden;}
+input,textarea,select,option {
+	font-family:inherit;
+	font-size:100%;	
+	outline:0;
+	border:none;
+}
+button{background-color: #f39800;color: #00f;}
+textarea{overflow:auto;resize:none;resize: vertical;/*垂直拉*/}
+
+
+
+/* 公共独立类名 */
+.clear{clear:both;}
+.clear{
+	clear: both;
+	display: block;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+}
+.fl{float:left;}
+.fr{float:right;}
+.bold {font-weight: bold;}
+.hide{display: none!important;}
+.block{display: block;}
+.none{display: none;}
+
+.red{background-color:#FFF;color:#F00;}
+.blue{background-color:#FFF;color:#00F;}
+.green{background-color:#0A0;color:#0F0;}
+.orange{background-color:#FFF;color:#F60;}
+.yellow{background-color:#FF0;color:#f39800;}
+
+
+
+/* 总体布局样式 */
+.wbody{width:1200px; margin:0 auto;}/*全局*/
+.header{}
+.nav{*zoom: 1;}/*导航*/
+.footer{background-color:#2f2f2f;color:#979797;}/*底部*/

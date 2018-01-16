@@ -1,0 +1,14 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <p class="nav">欢迎来到数据中心！</p>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminIndex/index')}">
+        关键词：
+        <input class="form-control" style="width:40%" type="text" name="keyword" value="{$keyword|default=''}" placeholder="请输入关键字">
+        <button class="btn btn-primary">搜索</button>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
