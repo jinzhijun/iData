@@ -1,50 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>守护内心的世界</title>
-	<script type="text/javascript" src="http://www.wowlothar.cn/public/ckplayer6/js/offlights.js"></script>
+    <title>站点访问页 - Lothar - {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="test@public/head"/>
+
+    <style type="text/css">
+        .wbody{width: 99%;padding-left: 0.5%}
+        tr{text-align:center;}
+        th,td{padding: 5px;}
+        td,td a{color: #000;}
+        tbody td:hover{background-color:orange;}
+        tbody tr:nth-of-type(odd){background-color:#CCC;}
+        tbody tr:nth-of-type(even){background-color:#FFF;}
+        ul{list-style:none;float:right;margin-right:10%;}
+        ul li{float: left;margin-right:3px;text-align:center;background-color:#CCC;}
+        ul li a{text-decoration:none;display:block;width:50px;height:40px;line-height:40px;padding:2px;color:#000}
+        ul li a:hover{background-color:yellow;color:#F00;font-size:26px;font-weight: bold;}
+        .bgt a{margin-right: 10px;text-decoration: underline;}
+        .biga{font-size:26px;font-weight:bold;color:#F00;margin-left:150px;}
+        .cur{color: red}
+    </style>
 </head>
 
 <body>
-	<!-- <video src="http://www.wowlothar.cn/test/media/page.swf" controls="controls">your browser does not support the video tag.</video> -->
-	<!-- <video width="320" height="240" autoplay controls="controls" loop >
-		<source src="http://www.wowlothar.cn/test/media/sound.mp3" type="audio/mpeg">
-		<source src="http://www.wowlothar.cn/test/media/page.swf" type="video/swf"> Your browser does not support the video tag.
-	</video> -->
+    <div class="wbody">
+        <div class="bgt">
+            <p>
+                <a href="test/wangfei.html">入口一</a>
+                <a href="http://bbs.tianya.cn/post-music-207851-1.shtml">入口二</a>
+                <a href="http://lol.qq.com/act/a20161116elementalist/">入口三</a>
+                <a href="http://wgames.wowlothar.cn">入口四</a>
+                <a href="test/">入口五</a>
+            </p>
+            <p>
+                <a href="http://www.boxofficemojo.com/alltime/world/" target="_blank">>> 世界电影排行榜，目前《战狼2》排在第56名！（Box Office Mojo）</a>
+            </p>
+            <p>
+                <a href="https://www.douban.com/doulist/1641439/" target="_blank">>> 全球电影票房总排行榜（豆瓣）</a>
+            </p>
+            <br>
+            <p>
+                <a class="biga" href="https://share.weiyun.com/e77c5b6b9dd938f0fa406b7194c6147a">>> 战狼Ⅱ.mp4（片源1）</a>
+            </p>
+            <p>
+                <a class="biga" href="http://op.wowlothar.cn/wolf/">>> 战狼Ⅱ（片源2）<<</a>
+            </p>
+            <p>
+                <a class="biga" href="http://www.iqiyi.com/w_19rtx0esh9.html?share_sTime=0-share_eTime=1336-src=sharemodclk131212">《泰坦尼克号》删减片段，最催泪感人的部分</a>
+                <!-- <span>链接：http://pan.baidu.com/s/1miLva9U 密码：ol0s</span> -->
+            </p>
+            <p>
+                <a class="biga" href="http://op.wowlothar.cn/travel/">>> 侣行 第三季（片源2）<<</a>
+            </p>
+            <br>
+            <p><a href="{:url('media/Book/index')}">《战狼Ⅱ》最燃的20句</a></p>
+            <p>
+                <a href="{:url('idata/Garden/index')}">Lothar的后花园</a>
+            </p>
+            <br>
+            <h3>访问日志：</h3>
+            <p>历史累计：1 条。</p>
+            <p>显示最近 1 条访问记录：</p>
+            <p>你的id：<b style="color:#F00;font-size:16px;">1</b> 。</p>
+        </div>
+    </div>
 
-	<audio src="http://www.wowlothar.cn/test/media/sound.mp3" autoplay loop >Your browser does not support the audio tag.</audio>
+    <!-- 日志记录 -->
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>类型</th>
+                    <th>今日次数</th>
+                    <th>代理</th>
+                    <th>IP</th>
+                    <th>IP转地址</th>
+                    <th>首次时间</th>
+                    <th>最后时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <foreach name="list" item="vo">
+                <tr>
+                    <td>{$vo.id}</td>
+                    <td>{$vo.obj_type}</td>
+                    <td>{$vo.total}</td>
+                    <td>{$vo.agent}</td>
+                    <td>{$vo.ip}</td>
+                    <td>{$vo.ipaddrVar}</td>
+                    <td>{:date('Y-m-d H:i:s',$vo.create_time)}</td>
+                    <td>{:date('Y-m-d H:i:s',$vo.update_time)}</td>
+                    <td><a href="#">无权</a></td>
+                </tr>
+                </foreach>
+            </tbody>
+        </table>
+        <ul class="pagination">{$pager|default=''}</ul>
+    </div>
 
-	<object width="480" height="360" data="http://www.wowlothar.cn/test/media/page.swf" ></object>
-	<!-- <object data="http://www.wowlothar.cn/test/media/page.swf" type="application/x-shockwave-flash">
-		<param name="movie" value="http://www.wowlothar.cn/test/media/page.swf"/>
-		<embed src="http://www.wowlothar.cn/test/media/page.swf"/>
-	</object> -->
-
-
-
-
-<!-- <div id="video" style="position:relative;z-index: 100;width:600px;height:400px;float: left;"><div id="a1"></div></div> -->
-
-<!-- <script type="text/javascript" src="http://www.wowlothar.cn/public/ckplayer6/ckplayer/ckplayer.js" charset="utf-8"></script> -->
-<script type="text/javascript">
-// var flashvars={
-// 	f:'http://www.wowlothar.cn/test/media/page.swf',
-// 	c:0,
-// 	b:1
-// 	};
-// var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always'};
-// CKobject.embedSWF('http://www.wowlothar.cn/public/ckplayer6/ckplayer/ckplayer.swf','a1','ckplayer_a1','600','400',flashvars,params);
-
-// // CKobject.embedSWF(播放器路径,容器id,播放器id/name,播放器宽,播放器高,flashvars的值,其它定义也可省略);
-// // 下面三行是调用html5播放器用到的
-
-// var video=['http://www.wowlothar.cn/test/media/page.mp4->video/mp4','http://www.ckplayer.com/webm/0.webm->video/webm','http://www.ckplayer.com/webm/0.ogv->video/ogg'];
-// var support=['iPad','iPhone','ios','android+false','msie10+false'];
-// CKobject.embedHTML5('video','ckplayer_a1',600,400,video,flashvars,support);
-</script>
-
-
-
+    <include file="test@public/footer"/>
 </body>
 </html>
