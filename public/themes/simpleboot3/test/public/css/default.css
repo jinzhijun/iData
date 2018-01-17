@@ -5,17 +5,19 @@
  * 作用范围：公共
  * hover 会继承上一个元素的属性
 */
-*{margin:0;padding:0;border:0;}
-html,body {
+/**{margin:0;padding:0;border:0;}*/
+/*html,body,div,p,a,img,h1,h2,h3,h4,h5,h6,ol,li,ul,a,dd,dt,dl,input,select,textarea,button{}*/
+html,body{
+	margin:0;padding:0;border:0;
 	font: 14px/1.5 "microsoft yahei", Helvetica, Tahoma, Arial, "Microsoft jhengHei", sans-serif;
 	color:#FFF;
 	background-color:#000;
 }
-a{text-decoration:none;color: #FFF;}
-a:hover{text-decoration:underline;color:#FFED6D;}
+a{text-decoration:none;color:#FFF;}
+a:hover{text-decoration:underline;cursor:pointer;color:#FFED6D;}
 img{border:0 none;max-width: 100%;}
+img{transform:scale(1) translateZ(0);}
 ol,ul{list-style:none;}
-div,span,ul,li{ overflow:hidden;}
 input,textarea,select,option {
 	font-family:inherit;
 	font-size:100%;	
@@ -28,31 +30,44 @@ textarea{overflow:auto;resize:none;resize: vertical;/*垂直拉*/}
 
 
 /* 公共独立类名 */
+.fl{float:left;}
+.fr{float:right;}
 .clear{clear:both;}
-.clear{
+.clearmore{
 	clear: both;
 	display: block;
 	height: 0;
 	line-height: 0;
 	font-size: 0;
 }
-.fl{float:left;}
-.fr{float:right;}
-.bold {font-weight: bold;}
-.hide{display: none!important;}
-.block{display: block;}
-.none{display: none;}
+.active{/*当前样式*/}
+.bold{font-weight:bold;}
+.show{display:block;}
+.hide{display:none!important;}
+.border{border:1px #CCC solid}
 
+/*公共颜色*/
+.success_color{color: #009241!important;}
+.error_color{color: #F00!important;}
 .red{background-color:#FFF;color:#F00;}
-.blue{background-color:#FFF;color:#00F;}
-.green{background-color:#0A0;color:#0F0;}
 .orange{background-color:#FFF;color:#F60;}
 .yellow{background-color:#FF0;color:#f39800;}
+.blue{background-color:#FFF;color:#00F;}
+.green{background-color:#0A0;color:#0F0;}
 
 
 
 /* 总体布局样式 */
-.wbody{width:1200px; margin:0 auto;}/*全局*/
+/*placeholder*/
+.inp{color:#666;}
+
+/*header,section,nav,footer{min-width:1200px;}
+.main{width:1200px;margin:0 auto;}*/
+
+.wbody{width:1200px; margin:0 auto;}
 .header{}
-.nav{*zoom: 1;}/*导航*/
-.footer{background-color:#2f2f2f;color:#979797;}/*底部*/
+.nav{*zoom: 1;}
+.footer{background-color:#2f2f2f;color:#979797;}
+
+
+

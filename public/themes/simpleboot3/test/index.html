@@ -8,21 +8,27 @@
     <include file="test@public/head"/>
 
     <style type="text/css">
-        .wbody{width: 99%;padding-left: 0.5%}
-        tr{text-align:center;}
-        th,td{padding: 5px;}
-        td,td a{color: #000;}
-        tbody td:hover{background-color:#ffa500;color:#272626}
+        table{background-color:#CCC;}
+        tbody td:hover{background-color:#ffa500;color:#191818}
         tbody tr:nth-of-type(odd){background-color:#CCC;}
         tbody tr:nth-of-type(even){background-color:#FFF;}
-        ul{list-style:none;float:right;margin-right:10%;}
-        ul li{float: left;margin-right:3px;text-align:center;background-color:#CCC;}
-        ul li a{text-decoration:none;display:block;width:50px;height:40px;line-height:40px;padding:2px;color:#000}
-        ul li a:hover{background-color:yellow;color:#F00;font-size:26px;font-weight: bold;}
+        /*额外资源*/
+        .bgt,.visit_log_head{width:99%;padding-left:0.5%}
         .bgt a{margin-right: 10px;text-decoration: underline;}
-        .biga{font-size:26px;font-weight:bold;color:#F00;margin-left:150px;}
-        .cur{color: red}
+        .biga{font-size:26px;font-weight:bold;color:#F00;margin-left:10%;}
+        /*日志*/
+        .visit_log{}
+        .visit_log_list{width:100%;border:1px #F00 solid;}
+        /*当内容超出设定的宽度时自动出现横向滚动条：scroll滚动，nowrap不换行*/
+        /*.visit_log_table{overflow-x:scroll;width:100%;white-space:nowrap;}*/
+        /*.visit_log_table{overflow-x:scroll;overflow-y:auto;}*/
+        /*.visit_log_table{overflow-x:scroll;overflow-y:hidden;}*/
+        .visit_log_table{overflow-x:auto;}
         .list-tr td{color:#F00}
+        .visit_log_table th{color:#000}
+        .visit_log_table td{color:#0a0a75}
+        /*分页*/
+        .pagination{width:100%}
     </style>
 </head>
 
@@ -69,42 +75,46 @@
             <div class="visit_log_head">
                 <h3>访问日志：</h3>
                 <p>
-                    历史累计：<b>{:count($list)}</b> 条。 &nbsp; &nbsp; 
+                    历史累计：<b>{:count($list)}</b> 条。 &nbsp; &nbsp;
                     你的id：<b style="color:#F00;font-size:16px;">{$your_visit_id}</b> 。
                 </p>
                 <p>显示最近 <b>{$limit}</b> 条访问记录：</p>
             </div>
-            <table class="visit_log_table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>类型</th>
-                        <th>今日次数</th>
-                        <th>代理</th>
-                        <th>IP</th>
-                        <th>IP转地址</th>
-                        <th>首次时间</th>
-                        <th>最后时间</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <foreach name="list" item="vo">
-                    <tr class="{$vo.id==$your_visit_id?='list-tr'}">
-                        <td>{$vo.id}</td>
-                        <td>{$vo.obj_type}</td>
-                        <td>{$vo.total}</td>
-                        <td>{$vo.agent}</td>
-                        <td>{$vo.ip}</td>
-                        <td>{$vo.ipaddrVar}</td>
-                        <td>{:date('Y-m-d H:i:s',$vo.create_time)}</td>
-                        <td>{:date('Y-m-d H:i:s',$vo.update_time)}</td>
-                        <td><a href="#">无权</a></td>
-                    </tr>
-                    </foreach>
-                </tbody>
-            </table>
-            <ul class="pagination">{$pager|default=''}</ul>
+            <div class="visit_log_list ">
+                <ul class="pagination">{$pager|default=''}</ul>
+                <table class="visit_log_table " align="left" border="1"  cellpadding="0" cellspacing="2">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>类型</th>
+                            <th>今日次数</th>
+                            <th>代理</th>
+                            <th>IP</th>
+                            <th>IP转地址</th>
+                            <th>首次时间</th>
+                            <th>最后时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <foreach name="list" item="vo">
+                        <tr class="{$vo.id==$your_visit_id?='list-tr'}">
+                            <td>{$vo.id}</td>
+                            <td>{$vo.obj_type}</td>
+                            <td>{$vo.total}</td>
+                            <td>{$vo.agent}</td>
+                            <td>{$vo.ip}</td>
+                            <td>{$vo.ipaddrVar}</td>
+                            <td>{:date('Y-m-d H:i:s',$vo.create_time)}</td>
+                            <td>{:date('Y-m-d H:i:s',$vo.update_time)}</td>
+                            <td><a href="#">无权</a></td>
+                        </tr>
+                        </foreach>
+                    </tbody>
+                </table>
+                <div class="clear"></div>
+                <ul class="pagination">{$pager|default=''}</ul>
+            </div>
         </div>
     </div>
 
