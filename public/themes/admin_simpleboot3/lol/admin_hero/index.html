@@ -8,9 +8,9 @@
     </ul>
     <form class="well form-inline margin-top-20" method="post" action="{:url('AdminHero/index')}">
         英雄定位:
-        <select class="form-control" name="position" style="width:140px;">
+        <select class="form-control" name="cid" style="width:140px;">
             <option value="">全部</option>
-            {$position_tree|default=''}
+            {$cate_tree|default=''}
         </select> &nbsp;&nbsp;
         发布时间:
         <input type="text" class="form-control js-bootstrap-datetime" name="start_time"
@@ -26,6 +26,7 @@
         <a class="btn btn-danger" href="{:url('AdminHero/index')}">清空</a>
     </form>
     <form class="js-ajax-form" action="" method="post">
+        <include file="admin_hero/table-actions"/>
         <table class="table table-hover table-bordered table-list">
             <thead>
                 <include file="admin_hero/table-th"/>
@@ -90,6 +91,7 @@
                 <include file="admin_hero/table-th"/>
             </tfoot>
         </table>
+        <include file="admin_hero/table-actions"/>
         <ul class="pagination">{$pager|default=''}</ul>
     </form>
 </div>

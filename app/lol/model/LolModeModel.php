@@ -8,20 +8,21 @@ use app\idata\model\ComModel;
 * @param string $field
 * @return object $list 
 */
-class LolHeroModel extends ComModel
+class LolModeModel extends ComModel
 {
     public function getLists($filter=[], $order='', $limit=15, $field='', $extra=[])
     {
-        $field = empty($field) ? 'id,hchampion,hname,hcname,oldername,hvoucher,hgold,hposition,wpct,hard,description,published_time,is_top,is_rec,status,more': $field;
-        $where = ['delete_time'=>0];
+        $field = empty($field) ? '*': $field;
+        $where = [];
+        // $where = ['delete_time'=>0];
         // $join = [
         //     ['__USER__ u', 'a.user_id = u.id']
         // ];
         $where = array_merge($where,$extra);
 
-        $position = empty($filter['cid']) ? 0 : intval($filter['cid']);
+        $type = empty($filter['cid']) ? 0 : intval($filter['cid']);
         if (!empty($position)) {
-            $where['hposition'] = ['like', "%$position%"];
+            $where['type'] = ['like', "%$type%"];
         }
 
         $startTime = empty($filter['start_time']) ? 0 : strtotime($filter['start_time']);
@@ -39,7 +40,7 @@ class LolHeroModel extends ComModel
 
         $keyword = empty($filter['keyword']) ? '' : $filter['keyword'];
         if (!empty($keyword)) {
-            $where['hchampion|hname|hcname|oldername'] = ['like', "%$keyword%"];
+            $where['name'] = ['like', "%$keyword%"];
         }
 
         $order = empty($order) ? 'update_time DESC,id DESC' : $order;

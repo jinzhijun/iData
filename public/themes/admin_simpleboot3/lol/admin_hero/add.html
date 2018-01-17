@@ -8,8 +8,8 @@
     <li id="saved-image{id}">
         <input id="photo-{id}" type="hidden" name="photo[urls][]" value="{filepath}">
         <input class="form-control" id="photo-{id}-name" type="text" name="photo[names][]" value="{name}"
-               style="width: 200px;" title="图片名称">
-        <img id="photo-{id}-preview" src="{url}" style="height:36px;width: 36px;"
+               style="width:200px;" title="图片名称">
+        <img id="photo-{id}-preview" src="{url}" style="height:36px;width:36px;"
              onclick="imagePreviewDialog(this.src);">
         <a href="javascript:uploadOneImage('图片上传','#photo-{id}');">替换</a>
         <a href="javascript:(function(){$('#saved-image{id}').remove();})();">移除</a>
@@ -19,7 +19,7 @@
     <li id="saved-file{id}">
         <input id="file-{id}" type="hidden" name="file[urls][]" value="{filepath}">
         <input class="form-control" id="file-{id}-name" type="text" name="file[names][]" value="{name}"
-               style="width: 200px;" title="文件名称">
+               style="width:200px;" title="文件名称">
         <a id="file-{id}-preview" href="{preview_url}" target="_blank">下载</a>
         <a href="javascript:uploadOne('图片上传','#file-{id}','file');">替换</a>
         <a href="javascript:(function(){$('#saved-file{id}').remove();})();">移除</a>
@@ -31,45 +31,42 @@
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
         <li><a href="{:url('AdminHero/index')}">英雄管理</a></li>
-        <li>
-            <a href="{:url('AdminHero/add')}">添加英雄</a>
-        </li>
-        <li class="active"><a href="#">编辑英雄</a></li>
+        <li class="active"><a href="{:url('AdminHero/add')}">添加英雄</a></li>
     </ul>
-    <form action="{:url('AdminHero/editPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
+    <form action="{:url('AdminHero/addPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
         <div class="row">
             <div class="col-md-9">
                 <table class="table table-bordered">
                     <tr>
                         <th width="100">英雄称谓<span class="form-required">*</span></th>
                         <td>
-                            <input class="form-control" type="text" name="post[hchampion]" value="{$post.hchampion}" placeholder="英雄称谓" required/>
+                            <input class="form-control" type="text" name="post[hchampion]" value="" placeholder="英雄称谓" required/>
                         </td>
                     </tr>
                     <tr>
                         <th>中文名</th>
                         <td>
-                            <input class="form-control" type="text" name="post[hname]" value="{$post.hname}" placeholder="中文名">
+                            <input class="form-control" type="text" name="post[hname]" value="" placeholder="中文名">
                             <p class="help-block">中文名</p>
                         </td>
                     </tr>
                     <tr>
                         <th>英雄别名</th>
                         <td>
-                            <input class="form-control" type="text" name="post[hcname]" value="{$post.hcname|default=''}" placeholder="">
+                            <input class="form-control" type="text" name="post[hcname]" value="" placeholder="">
                         </td>
                     </tr>
                     <tr>
                         <th>曾用名</th>
                         <td>
-                            <input class="form-control" type="text" name="post[oldername]" value="{$post.oldername}" placeholder="">
+                            <input class="form-control" type="text" name="post[oldername]" value="" placeholder="">
                         </td>
                     </tr>
                     
                     <tr>
                         <th>英雄定位</th>
                         <td>
-                            <input class="form-control" type="text" name="post[hname]" value="{$post.hname}" placeholder="">
+                            <input class="form-control" type="text" name="post[hname]" value="" placeholder="">
                         </td>
                     </tr>
 
@@ -79,7 +76,7 @@
                         <td>
                             <select class="form-control" name="post[hvoucher]">
                                 <foreach name="coup.list" item="vo">
-                                <option {$post.hvoucher==$vo?='selected'} value="{$vo}">{$vo}</option>
+                                <option value="{$vo}">{$vo}</option>
                                 </foreach>
                             </select>
                         </td>
@@ -90,7 +87,7 @@
                         <td>
                             <select class="form-control" name="post[hgold]">
                                 <foreach name="gold.list" item="vo">
-                                <option {$post.hgold==$vo?='selected'} value="{$vo}">{$vo}</option>
+                                <option value="{$vo}">{$vo}</option>
                                 </foreach>
                             </select>
                         </td>
@@ -99,41 +96,32 @@
                     <tr>
                         <th>描述</th>
                         <td>
-                            <textarea class="form-control" name="post[description]" style="height:50px;" placeholder="请填写摘要">{$post.description}</textarea>
+                            <textarea class="form-control" name="post[description]" style="height:50px;" placeholder="请填写摘要"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <th>内容</th>
                         <td>
-                            <script type="text/plain" id="content" name="post[content]">{$post.content}</script>
+                            <script type="text/plain" id="content" name="post[content]"></script>
                         </td>
                     </tr>
                     <tr>
                         <th>相册</th>
                         <td>
-                            <ul id="photos" class="pic-list list-unstyled form-inline">
-                                <notempty name="post.more.photos">
-                                    <foreach name="post.more.photos" item="vo">
-                                        <li id="saved-image{$key}">
-                                            <input id="photo-{$key}" type="hidden" name="photo[urls][]"
-                                                   value="{$vo.url}">
-                                            <input class="form-control" id="photo-{$key}-name" type="text"
-                                                   name="photo[names][]"
-                                                   value="{$vo.name|default=''}" style="width: 200px;" title="图片名称">
-                                            <img id="photo-{$key}-preview"
-                                                 src="{:cmf_get_image_preview_url($vo['url'])}"
-                                                 style="height:36px;width: 36px;"
-                                                 onclick="parent.imagePreviewDialog(this.src);">
-                                            <a href="javascript:uploadOneImage('图片上传','#photo-{$key}');">替换</a>
-                                            <a href="javascript:(function(){$('#saved-image{$key}').remove();})();">移除</a>
-                                        </li>
-                                    </foreach>
-                                </notempty>
-                            </ul>
+                            <ul id="photos" class="pic-list list-unstyled form-inline"></ul>
                             <a href="javascript:uploadMultiImage('图片上传','#photos','photos-item-tpl');"
-                               class="btn btn-sm btn-default">选择图片</a>
+                               class="btn btn-default btn-sm">选择图片</a>
                         </td>
                     </tr>
+                    <!-- <tr>
+                        <th>附件</th>
+                        <td>
+                            <ul id="files" class="pic-list list-unstyled form-inline">
+                            </ul>
+                            <a href="javascript:uploadMultiFile('附件上传','#files','files-item-tpl','file');"
+                               class="btn btn-sm btn-default">选择文件</a>
+                        </td>
+                    </tr> -->
                 </table>
             </div>
             <div class="col-md-3">
@@ -141,52 +129,44 @@
                     <tr>
                         <th>头像</th>
                         <td>
-                            <div style="text-align: center;">
-                                <input type="hidden" name="post[more][thumbnail]" id="thumbnail"
-                                       value="{$post.more.thumbnail|default=''}">
+                            <div style="text-align:center;">
+                                <input type="hidden" name="post[more][thumbnail]" id="thumbnail" value="">
                                 <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
-                                    <if condition="empty($post.more.thumbnail)">
-                                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
-                                             id="thumbnail-preview"
-                                             width="135" style="cursor: pointer"/>
-                                    <else/>
-                                        <img src="{:cmf_get_image_preview_url($post.more.thumbnail)}"
-                                             id="thumbnail-preview"
-                                             width="135" style="cursor: pointer"/>
-                                    </if>
+                                    <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                         id="thumbnail-preview"
+                                         width="135" style="cursor:pointer"/>
                                 </a>
                                 <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
                             </div>
                         </td>
                     </tr>
-
                     <tr>
                         <th>攻击</th>
                         <php>$progress_bar = config('progress_bar');</php>
                         <td>
-                            <input class="form-control" type="text" name="post[hatk]" value="{$post.hatk}">
-                            <progress max="{$progress_bar.max}" value="{$post.hatk|default=''}"></progress>
+                            <input class="form-control" type="text" name="post[hatk]" value="">
+                            <progress max="{$progress_bar.max}" value=""></progress>
                         </td>
                     </tr>
                     <tr>
                         <th>防御</th>
                         <td>
-                            <input class="form-control" type="text" name="post[hdefense]" value="{$post.hdefense}">
-                            <progress max="{$progress_bar.max}" value="{$post.hdefense|default=''}"></progress>
+                            <input class="form-control" type="text" name="post[hdefense]" value="">
+                            <progress max="{$progress_bar.max}" value=""></progress>
                         </td>
                     </tr>
                     <tr>
                         <th>魔法</th>
                         <td>
-                            <input class="form-control" type="text" name="post[hmagic]" value="{$post.hmagic}">
-                            <progress max="{$progress_bar.max}" value="{$post.hmagic|default=''}"></progress>
+                            <input class="form-control" type="text" name="post[hmagic]" value="">
+                            <progress max="{$progress_bar.max}" value=""></progress>
                         </td>
                     </tr>
                     <tr>
                         <th>难度</th>
                         <td>
-                            <input class="form-control" type="text" name="post[hard]" value="{$post.hard}">
-                            <progress max="{$progress_bar.max}" value="{$post.hard|default=''}"></progress>
+                            <input class="form-control" type="text" name="post[hard]" value="">
+                            <progress max="{$progress_bar.max}" value=""></progress>
                         </td>
                     </tr>
 
@@ -195,7 +175,7 @@
                         <th>发布时间</th>
                         <td>
                             <input class="form-control js-bootstrap-datetime" type="text" name="post[published_time]"
-                                   value="{$post.published_time?=date('Y-m-d H:i',$post.published_time)}">
+                                   value="">
                         </td>
                     </tr>
 
@@ -214,7 +194,7 @@
                         <th></th>
                         <td>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="post[is_top]" value="1" {$post.is_top?='checked'}>置顶</label>
+                                <label><input type="checkbox" name="post[is_top]" value="1">置顶</label>
                             </div>
                         </td>
                     </tr>
@@ -222,7 +202,7 @@
                         <th></th>
                         <td>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="post[is_rec]" value="1" {$post.is_rec?='checked'}>推荐</label>
+                                <label><input type="checkbox" name="post[is_rec]" value="1">推荐</label>
                             </div>
                         </td>
                     </tr>
@@ -231,9 +211,8 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="hidden" name="post[id]" value="{$post.id}">
-                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
-                <a class="btn btn-default" href="javascript:history.back(-1);">{:lang('BACK')}</a>
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                <a class="btn btn-default" href="{:url('AdminHero/index')}">{:lang('BACK')}</a>
             </div>
         </div>
     </form>

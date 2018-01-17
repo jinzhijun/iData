@@ -1,21 +1,21 @@
 <div class="table-actions">
     <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
-            data-action="{:url('AdminHero/change',['status'=>1])}" data-subcheck="true">发布
+            data-action="{:url('AdminMode/change',['status'=>1])}" data-subcheck="true">发布
     </button>
     <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
-            data-action="{:url('AdminHero/change',['status'=>0])}" data-subcheck="true">取消发布
+            data-action="{:url('AdminMode/change',['status'=>0])}" data-subcheck="true">取消发布
     </button>
     <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
-            data-action="{:url('AdminHero/change',['is_top'=>1])}" data-subcheck="true">置顶
+            data-action="{:url('AdminMode/change',['is_top'=>1])}" data-subcheck="true">置顶
     </button>
     <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
-            data-action="{:url('AdminHero/change',['is_top'=>0])}" data-subcheck="true">取消置顶
+            data-action="{:url('AdminMode/change',['is_top'=>0])}" data-subcheck="true">取消置顶
     </button>
     <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
-            data-action="{:url('AdminHero/change',['is_rec'=>1])}" data-subcheck="true">推荐
+            data-action="{:url('AdminMode/change',['is_rec'=>1])}" data-subcheck="true">推荐
     </button>
     <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
-            data-action="{:url('AdminHero/change',['is_rec'=>0])}" data-subcheck="true">取消推荐
+            data-action="{:url('AdminMode/change',['is_rec'=>0])}" data-subcheck="true">取消推荐
     </button>
     <!--
     <notempty name="category">
@@ -24,7 +24,7 @@
     <button class="btn btn-primary btn-sm js-articles-copy" type="button">批量复制</button>
     -->
     <button class="btn btn-danger btn-sm js-ajax-submit" type="submit"
-            data-action="{:url('AdminHero/delete')}" data-subcheck="true" data-msg="您确定删除吗？">
+            data-action="{:url('AdminMode/delete')}" data-subcheck="true" data-msg="您确定删除吗？">
         {:lang('DELETE')}
     </button>
 </div>

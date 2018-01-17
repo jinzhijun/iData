@@ -26,6 +26,7 @@
         .visit_log_table{overflow-x:auto;}
         .visit_log_table th{color:#000}
         .visit_log_table td{color:#0a0a75}
+        .visit_log_table td a{color:#000}
         .list-tr td{color:#F00}
         /*分页*/
         .pagination{width:100%}
@@ -80,10 +81,10 @@
                 </p>
                 <p>显示最近 <b>{$limit}</b> 条访问记录：</p>
             </div>
-            <div class="visit_log_list ">
+            <div class="visit_log_list">
                 <ul class="pagination">{$pager|default=''}</ul>
-                <table class="visit_log_table " align="left" border="1"  cellpadding="0" cellspacing="2">
-                    <thead>
+                <table class="visit_log_table" border="3" cellpadding="2" cellspacing="1">
+                    <thead align="center" style="white-space:nowrap;">
                         <tr>
                             <th>#</th>
                             <th>类型</th>
@@ -96,7 +97,7 @@
                             <th>操作</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody align="center">
                         <foreach name="list" item="vo">
                         <tr class="{$vo.id==$your_visit_id?='list-tr'}">
                             <td>{$vo.id}</td>
