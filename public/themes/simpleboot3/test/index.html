@@ -12,7 +12,7 @@
         tr{text-align:center;}
         th,td{padding: 5px;}
         td,td a{color: #000;}
-        tbody td:hover{background-color:orange;}
+        tbody td:hover{background-color:#ffa500;color:#272626}
         tbody tr:nth-of-type(odd){background-color:#CCC;}
         tbody tr:nth-of-type(even){background-color:#FFF;}
         ul{list-style:none;float:right;margin-right:10%;}
@@ -22,6 +22,7 @@
         .bgt a{margin-right: 10px;text-decoration: underline;}
         .biga{font-size:26px;font-weight:bold;color:#F00;margin-left:150px;}
         .cur{color: red}
+        .list-tr td{color:#F00}
     </style>
 </head>
 
@@ -89,7 +90,7 @@
                 </thead>
                 <tbody>
                     <foreach name="list" item="vo">
-                    <tr>
+                    <tr class="{$vo.id==$your_visit_id?='list-tr'}">
                         <td>{$vo.id}</td>
                         <td>{$vo.obj_type}</td>
                         <td>{$vo.total}</td>

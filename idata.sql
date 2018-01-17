@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50553
+Source Server Version : 50540
 Source Host           : localhost:3306
 Source Database       : idata
 
 Target Server Type    : MYSQL
-Target Server Version : 50553
+Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2018-01-17 01:22:28
+Date: 2018-01-17 12:17:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -574,12 +574,14 @@ CREATE TABLE `cmf_link` (
   `rel` varchar(50) NOT NULL DEFAULT '' COMMENT '链接与网站的关系',
   PRIMARY KEY (`id`),
   KEY `link_visible` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='友情链接表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='友情链接表';
 
 -- ----------------------------
 -- Records of cmf_link
 -- ----------------------------
 INSERT INTO `cmf_link` VALUES ('1', '1', '1', '8', 'thinkcmf官网', 'http://www.thinkcmf.com', 'ThinkCMF', '', '_blank', '');
+INSERT INTO `cmf_link` VALUES ('2', '1', '0', '1', '', 'http://www.wowlothar.cn/', 'Lothar', '', '_blank', '');
+INSERT INTO `cmf_link` VALUES ('3', '1', '0', '2', '', 'http://i.wowlothar.cn/', '爱数据', '', '_blank', '');
 
 -- ----------------------------
 -- Table structure for cmf_lol_hero
@@ -1199,7 +1201,7 @@ CREATE TABLE `cmf_option` (
 -- ----------------------------
 -- Records of cmf_option
 -- ----------------------------
-INSERT INTO `cmf_option` VALUES ('7', '1', 'site_info', '{\"site_name\":\"iData\",\"site_seo_title\":\"iData\",\"site_seo_keywords\":\"iData,lol,wowlothar,\\u6570\\u636e\",\"site_seo_description\":\"iData\\u6570\\u636e\\u4e2d\\u5fc3\",\"site_icp\":\"\\u7696ICP\\u590716020301\\u53f7\",\"site_admin_email\":\"915273691@qq.com\",\"site_analytics\":\"\",\"urlmode\":\"1\",\"html_suffix\":\"\",\"site_logo\":\"\",\"site_copyright\":\"\",\"site_tel\":\"\",\"site_addr\":\"\"}');
+INSERT INTO `cmf_option` VALUES ('7', '1', 'site_info', '{\"site_name\":\"iData\",\"site_seo_title\":\"iData\",\"site_seo_keywords\":\"iData,lol,wowlothar,\\u6570\\u636e\",\"site_seo_description\":\"iData\\u6570\\u636e\\u4e2d\\u5fc3\",\"site_icp\":\"\\u7696ICP\\u590716020301\\u53f7\",\"site_admin_email\":\"915273691@qq.com\",\"site_analytics\":\"\",\"urlmode\":\"1\",\"html_suffix\":\"\",\"site_logo\":\"\",\"site_copyright\":\"CopyRight 2016-2017  wowlothar.cn ,All Rights Reserved\",\"site_tel\":\"\",\"site_addr\":\"\"}');
 INSERT INTO `cmf_option` VALUES ('8', '1', 'smtp_setting', '{\"from_name\":\"lothar\",\"from\":\"wowlothar@foxmail.com\",\"host\":\"smtp.qq.com\",\"smtp_secure\":\"\",\"port\":\"25\",\"username\":\"915273691@qq.com\",\"password\":\"w756409185\"}');
 INSERT INTO `cmf_option` VALUES ('9', '1', 'cmf_settings', '{\"open_registration\":\"0\",\"banned_usernames\":\"\"}');
 INSERT INTO `cmf_option` VALUES ('10', '1', 'cdn_settings', '{\"cdn_static_root\":\"\"}');
@@ -1523,7 +1525,7 @@ INSERT INTO `cmf_theme_file` VALUES ('108', '0', '10', 'simpleboot3', '文章列
 INSERT INTO `cmf_theme_file` VALUES ('109', '0', '10', 'simpleboot3', '单页面', 'portal/Page/index', 'portal/page', '单页面模板文件', '{\"widgets\":{\"hottest_articles\":{\"title\":\"\\u70ed\\u95e8\\u6587\\u7ae0\",\"display\":\"1\",\"vars\":{\"hottest_articles_category_id\":{\"title\":\"\\u6587\\u7ae0\\u5206\\u7c7bID\",\"value\":\"\",\"type\":\"text\",\"dataSource\":{\"api\":\"portal\\/category\\/index\",\"multi\":true},\"placeholder\":\"\\u8bf7\\u9009\\u62e9\\u5206\\u7c7b\",\"tip\":\"\",\"rule\":{\"require\":true}}}},\"last_articles\":{\"title\":\"\\u6700\\u65b0\\u53d1\\u5e03\",\"display\":\"1\",\"vars\":{\"last_articles_category_id\":{\"title\":\"\\u6587\\u7ae0\\u5206\\u7c7bID\",\"value\":\"\",\"type\":\"text\",\"dataSource\":{\"api\":\"portal\\/category\\/index\",\"multi\":true},\"placeholder\":\"\\u8bf7\\u9009\\u62e9\\u5206\\u7c7b\",\"tip\":\"\",\"rule\":{\"require\":true}}}}}}', '{\"widgets\":{\"hottest_articles\":{\"title\":\"\\u70ed\\u95e8\\u6587\\u7ae0\",\"display\":\"1\",\"vars\":{\"hottest_articles_category_id\":{\"title\":\"\\u6587\\u7ae0\\u5206\\u7c7bID\",\"value\":\"\",\"type\":\"text\",\"dataSource\":{\"api\":\"portal\\/category\\/index\",\"multi\":true},\"placeholder\":\"\\u8bf7\\u9009\\u62e9\\u5206\\u7c7b\",\"tip\":\"\",\"rule\":{\"require\":true}}}},\"last_articles\":{\"title\":\"\\u6700\\u65b0\\u53d1\\u5e03\",\"display\":\"1\",\"vars\":{\"last_articles_category_id\":{\"title\":\"\\u6587\\u7ae0\\u5206\\u7c7bID\",\"value\":\"\",\"type\":\"text\",\"dataSource\":{\"api\":\"portal\\/category\\/index\",\"multi\":true},\"placeholder\":\"\\u8bf7\\u9009\\u62e9\\u5206\\u7c7b\",\"tip\":\"\",\"rule\":{\"require\":true}}}}}}', '');
 INSERT INTO `cmf_theme_file` VALUES ('110', '0', '10', 'simpleboot3', '搜索页面', 'portal/search/index', 'portal/search', '搜索模板文件', '{\"vars\":{\"varName1\":{\"title\":\"\\u70ed\\u95e8\\u641c\\u7d22\",\"value\":\"1\",\"type\":\"text\",\"tip\":\"\\u8fd9\\u662f\\u4e00\\u4e2atext\",\"rule\":{\"require\":true}}}}', '{\"vars\":{\"varName1\":{\"title\":\"\\u70ed\\u95e8\\u641c\\u7d22\",\"value\":\"1\",\"type\":\"text\",\"tip\":\"\\u8fd9\\u662f\\u4e00\\u4e2atext\",\"rule\":{\"require\":true}}}}', '');
 INSERT INTO `cmf_theme_file` VALUES ('111', '1', '0', 'simpleboot3', '模板全局配置', 'public/Config', 'public/config', '模板全局配置文件', '{\"vars\":{\"enable_mobile\":{\"title\":\"\\u624b\\u673a\\u6ce8\\u518c\",\"value\":1,\"type\":\"select\",\"options\":{\"1\":\"\\u5f00\\u542f\",\"0\":\"\\u5173\\u95ed\"},\"tip\":\"\"}}}', '{\"vars\":{\"enable_mobile\":{\"title\":\"\\u624b\\u673a\\u6ce8\\u518c\",\"value\":1,\"type\":\"select\",\"options\":{\"1\":\"\\u5f00\\u542f\",\"0\":\"\\u5173\\u95ed\"},\"tip\":\"\"}}}', '');
-INSERT INTO `cmf_theme_file` VALUES ('112', '1', '1', 'simpleboot3', '导航条', 'public/Nav', 'public/nav', '导航条模板文件', '{\"vars\":{\"company_name\":{\"title\":\"\\u516c\\u53f8\\u540d\\u79f0\",\"name\":\"company_name\",\"value\":\"ThinkCMF\",\"type\":\"text\",\"tip\":\"\",\"rule\":[]}}}', '{\"vars\":{\"company_name\":{\"title\":\"\\u516c\\u53f8\\u540d\\u79f0\",\"name\":\"company_name\",\"value\":\"ThinkCMF\",\"type\":\"text\",\"tip\":\"\",\"rule\":[]}}}', '');
+INSERT INTO `cmf_theme_file` VALUES ('112', '1', '1', 'simpleboot3', '导航条', 'public/Nav', 'public/nav', '导航条模板文件', '{\"vars\":{\"company_name\":{\"title\":\"\\u516c\\u53f8\\u540d\\u79f0\",\"name\":\"company_name\",\"value\":\"Lothar\",\"type\":\"text\",\"tip\":\"\",\"rule\":[]}}}', '{\"vars\":{\"company_name\":{\"title\":\"\\u516c\\u53f8\\u540d\\u79f0\",\"name\":\"company_name\",\"value\":\"ThinkCMF\",\"type\":\"text\",\"tip\":\"\",\"rule\":[]}}}', '');
 
 -- ----------------------------
 -- Table structure for cmf_third_party_user
@@ -1585,7 +1587,7 @@ CREATE TABLE `cmf_user` (
 -- ----------------------------
 -- Records of cmf_user
 -- ----------------------------
-INSERT INTO `cmf_user` VALUES ('1', '1', '0', '0', '1516016302', '1', '0', '1515924076', '1', 'lothar', '###f48cdfebc5d072d46677f0146165d88c', 'lothar', '915273691@qq.com', '', '', '', '127.0.0.1', '', '', '');
+INSERT INTO `cmf_user` VALUES ('1', '1', '0', '0', '1516162154', '2', '0', '1515924076', '1', 'lothar', '###f48cdfebc5d072d46677f0146165d88c', 'lothar', '915273691@qq.com', '', '', '', '127.0.0.1', '', '', '');
 
 -- ----------------------------
 -- Table structure for cmf_user_action
@@ -1682,12 +1684,13 @@ CREATE TABLE `cmf_user_score_log` (
   `score` int(11) NOT NULL DEFAULT '0' COMMENT '更改积分，可以为负',
   `coin` int(11) NOT NULL DEFAULT '0' COMMENT '更改金币，可以为负',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户操作积分等奖励日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='用户操作积分等奖励日志表';
 
 -- ----------------------------
 -- Records of cmf_user_score_log
 -- ----------------------------
 INSERT INTO `cmf_user_score_log` VALUES ('1', '1', '1516016302', 'login', '1', '0');
+INSERT INTO `cmf_user_score_log` VALUES ('2', '1', '1516159095', 'login', '1', '0');
 
 -- ----------------------------
 -- Table structure for cmf_user_token
@@ -1745,8 +1748,9 @@ CREATE TABLE `cmf_visit_log` (
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `idx1` (`create_time`,`ip`,`agent`(20))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='站点访问日志';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='站点访问日志';
 
 -- ----------------------------
 -- Records of cmf_visit_log
 -- ----------------------------
+INSERT INTO `cmf_visit_log` VALUES ('1', '0', 'pc', '0', '12', '127.0.0.1', '\"\\u672c\\u5730\"', '本地', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', '9d6e5576531c38953e05804e13fa8e74', '1516157120', '1516162613');

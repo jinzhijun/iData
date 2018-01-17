@@ -22,6 +22,10 @@ class IndexController extends HomeBaseController
     {
         // dump(cmf_get_current_user());die;
         // $this->error('用户尚未登录',url('user/Login/index'));
+
+        // 初始化、获取
+        $openMax = 25;// 你每日最大访问次数
+        $limit = 30;// 列表分页数
         $userId = cmf_get_current_user_id();
         $ip = $ip = get_client_ip(0, true);
         $time = Time::today();
@@ -42,7 +46,6 @@ class IndexController extends HomeBaseController
             'agent_md5' => $agent_md5,
         ];
         $find = $visitQ->field('id,total,ipaddr,ipaddrVar')->where($where)->find();
-        $openMax = 50;
         if ($find['total']>=5 && $find['total']<$openMax) {
             echo '还能打开页面 '.($openMax-$find['total']).' 次';
         } elseif ($find['total']>=$openMax) {
@@ -85,8 +88,7 @@ class IndexController extends HomeBaseController
         // 获取访问记录
         $field = 'id,obj_type,total,ip,ipaddrVar,agent,create_time,update_time';
         // $where = ['obj_type'=>'pc'];
-        $limit = 30;
-        $list = $visitQ->paginate($limit);
+        $list = $visitQ->order('id DESC')->paginate($limit);
 
 
         // 模板赋值
