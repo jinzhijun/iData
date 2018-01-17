@@ -24,7 +24,7 @@ class IndexController extends HomeBaseController
         // $this->error('用户尚未登录',url('user/Login/index'));
 
         // 初始化、获取
-        $openMax = 25;// 你每日最大访问次数
+        $openMax = 30;// 你每日最大访问次数
         $limit = 50;// 列表分页数
         $userId = cmf_get_current_user_id();
         $ip = $ip = get_client_ip(0, true);
