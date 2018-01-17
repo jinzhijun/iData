@@ -17,6 +17,11 @@ class PublicController extends AdminBaseController
 {
     public function _initialize()
     {
+        // parent::_initialize();//这里不能继承父类，否则死掉
+
+        // 默认跳转页面对应的模板文件 区别于前台
+        config('dispatch_success_tmpl', THINK_PATH.'tpl'.DS.'dispatch_jump_admin.tpl');
+        config('dispatch_error_tmpl', THINK_PATH.'tpl'.DS.'dispatch_jump_admin.tpl');
     }
 
     /**

@@ -12,6 +12,7 @@ class GardenController extends UserBaseController
 {
     public function index()
     {
+        $this->redirect('user/Profile/center');
         return $this->fetch('garden/index');
     }
 

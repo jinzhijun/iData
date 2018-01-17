@@ -21,12 +21,18 @@ class IndexController extends HomeBaseController
      */
     public function index()
     {
-        $id   = $this->request->param("id", 0, "intval");
+        $id = $this->request->param("id", 0, "intval");
+        if (empty($id)) {
+            $id = cmf_get_current_user_id();
+        }
+        if (empty($id)) {
+            $this->error('用户尚未登录',url('user/Login/index'));
+        }
         $userQuery = Db::name("User");
         $user = $userQuery->where('id',$id)->find();
         if (empty($user)) {
             session('user',null);
-            $this->error("查无此人！");
+            $this->error('查无此人！');
         }
         $this->assign($user);
         return $this->fetch(":index");

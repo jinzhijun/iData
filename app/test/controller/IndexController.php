@@ -20,6 +20,8 @@ class IndexController extends HomeBaseController
 {
     public function index()
     {
+        // dump(cmf_get_current_user());die;
+        // $this->error('用户尚未登录',url('user/Login/index'));
         $userId = cmf_get_current_user_id();
         $ip = $ip = get_client_ip(0, true);
         $time = Time::today();
@@ -40,7 +42,7 @@ class IndexController extends HomeBaseController
             'agent_md5' => $agent_md5,
         ];
         $find = $visitQ->field('id,total,ipaddr,ipaddrVar')->where($where)->find();
-        $openMax = 15;
+        $openMax = 50;
         if ($find['total']>=5 && $find['total']<$openMax) {
             echo '还能打开页面 '.($openMax-$find['total']).' 次';
         } elseif ($find['total']>=$openMax) {
@@ -83,10 +85,13 @@ class IndexController extends HomeBaseController
         // 获取访问记录
         $field = 'id,obj_type,total,ip,ipaddrVar,agent,create_time,update_time';
         // $where = ['obj_type'=>'pc'];
-        $list = $visitQ->paginate(30);
+        $limit = 30;
+        $list = $visitQ->paginate($limit);
 
 
         // 模板赋值
+        $this->assign('your_visit_id', $your_visit_id);
+        $this->assign('limit', $limit);
         $this->assign('list', $list);
         $this->assign('pager', $list->render());
         return $this->fetch(':index');

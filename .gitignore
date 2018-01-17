@@ -8,7 +8,7 @@ composer.lock
 /data
 !/data/install.lock
 !/data/conf/config.php
-!/data/lang/*
+#!/data/lang/*
 /public/api
 /public/assets
 /node_modules

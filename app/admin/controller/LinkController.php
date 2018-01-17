@@ -33,7 +33,7 @@ class LinkController extends AdminBaseController
     public function index()
     {
         $linkModel = new LinkModel();
-        $links     = $linkModel->select();
+        $links     = $linkModel->order('list_order ASC')->select();
         $this->assign('links', $links);
 
         return $this->fetch();

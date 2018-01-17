@@ -14,12 +14,16 @@ use think\Db;
 
 class AdminBaseController extends BaseController
 {
-
     public function _initialize()
     {
         // 监听admin_init
         hook('admin_init');
         parent::_initialize();
+
+        // 默认跳转页面对应的模板文件 区别于前台
+        config('dispatch_success_tmpl', THINK_PATH.'tpl'.DS.'dispatch_jump_admin.tpl');
+        config('dispatch_error_tmpl', THINK_PATH.'tpl'.DS.'dispatch_jump_admin.tpl');
+
         $session_admin_id = session('ADMIN_ID');
         if (!empty($session_admin_id)) {
             $user = Db::name('user')->where(['id' => $session_admin_id])->find();

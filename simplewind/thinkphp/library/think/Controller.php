@@ -9,6 +9,13 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
+//报告错误，但忽略通知
+// error_reporting(E_ALL ^ E_NOTICE);
+// 显示除了E_NOTICE(提示)和E_WARNING(警告)外的所有错误
+// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+// 不显示错误
+// error_reporting(0);
+
 namespace think;
 
 use think\exception\ValidateException;

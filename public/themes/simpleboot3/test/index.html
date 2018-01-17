@@ -4,6 +4,7 @@
     <title>站点访问页 - Lothar - {$site_info.site_name|default=''}</title>
     <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
     <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <base target="_blank" />
     <include file="test@public/head"/>
 
     <style type="text/css">
@@ -28,11 +29,11 @@
     <div class="wbody">
         <div class="bgt">
             <p>
-                <a href="test/wangfei.html">入口一</a>
+                <a href="{:url('test/Test/faye')}">入口一</a>
                 <a href="http://bbs.tianya.cn/post-music-207851-1.shtml">入口二</a>
                 <a href="http://lol.qq.com/act/a20161116elementalist/">入口三</a>
                 <a href="http://wgames.wowlothar.cn">入口四</a>
-                <a href="test/">入口五</a>
+                <a href="{:url('test/Test/test')}">入口五</a>
             </p>
             <p>
                 <a href="http://www.boxofficemojo.com/alltime/world/" target="_blank">>> 世界电影排行榜，目前《战狼2》排在第56名！（Box Office Mojo）</a>
@@ -60,48 +61,52 @@
                 <a href="{:url('idata/Garden/index')}">Lothar的后花园</a>
             </p>
             <br>
-            <h3>访问日志：</h3>
-            <p>历史累计：1 条。</p>
-            <p>显示最近 1 条访问记录：</p>
-            <p>你的id：<b style="color:#F00;font-size:16px;">1</b> 。</p>
+        </div>
+
+        <!-- 日志记录 -->
+        <div class="visit_log">
+            <div class="visit_log_head">
+                <h3>访问日志：</h3>
+                <p>
+                    历史累计：<b>{:count($list)}</b> 条。 &nbsp; &nbsp; 
+                    你的id：<b style="color:#F00;font-size:16px;">{$your_visit_id}</b> 。
+                </p>
+                <p>显示最近 <b>{$limit}</b> 条访问记录：</p>
+            </div>
+            <table class="visit_log_table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>类型</th>
+                        <th>今日次数</th>
+                        <th>代理</th>
+                        <th>IP</th>
+                        <th>IP转地址</th>
+                        <th>首次时间</th>
+                        <th>最后时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <foreach name="list" item="vo">
+                    <tr>
+                        <td>{$vo.id}</td>
+                        <td>{$vo.obj_type}</td>
+                        <td>{$vo.total}</td>
+                        <td>{$vo.agent}</td>
+                        <td>{$vo.ip}</td>
+                        <td>{$vo.ipaddrVar}</td>
+                        <td>{:date('Y-m-d H:i:s',$vo.create_time)}</td>
+                        <td>{:date('Y-m-d H:i:s',$vo.update_time)}</td>
+                        <td><a href="#">无权</a></td>
+                    </tr>
+                    </foreach>
+                </tbody>
+            </table>
+            <ul class="pagination">{$pager|default=''}</ul>
         </div>
     </div>
 
-    <!-- 日志记录 -->
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>类型</th>
-                    <th>今日次数</th>
-                    <th>代理</th>
-                    <th>IP</th>
-                    <th>IP转地址</th>
-                    <th>首次时间</th>
-                    <th>最后时间</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <foreach name="list" item="vo">
-                <tr>
-                    <td>{$vo.id}</td>
-                    <td>{$vo.obj_type}</td>
-                    <td>{$vo.total}</td>
-                    <td>{$vo.agent}</td>
-                    <td>{$vo.ip}</td>
-                    <td>{$vo.ipaddrVar}</td>
-                    <td>{:date('Y-m-d H:i:s',$vo.create_time)}</td>
-                    <td>{:date('Y-m-d H:i:s',$vo.update_time)}</td>
-                    <td><a href="#">无权</a></td>
-                </tr>
-                </foreach>
-            </tbody>
-        </table>
-        <ul class="pagination">{$pager|default=''}</ul>
-    </div>
-
-    <include file="test@public/footer"/>
+    <include file="public@footer"/>
 </body>
 </html>
