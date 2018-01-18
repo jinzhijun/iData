@@ -3,9 +3,9 @@ namespace app\admin\controller;
 
 use cmf\controller\AdminBaseController;
 use think\Db;
-use think\Model;
-use think\Loader;
-// use dbbackup\SqlBack;
+// use think\Model;
+// use think\Loader;
+use dbbackup\SqlBack;
 
 /**
 * 数据库备份还原
@@ -19,14 +19,6 @@ class DbBackupController extends AdminBaseController
         parent::_initialize();
         $this->dir = CMF_ROOT .'data'. $this->dir;//
         // $this->dir = getcwd() . $this->dir;// 使用当前工作空间
-
-        // $dname = config('database.database');
-        // $prefix = config("database.prefix");
-
-        // import('dbbackup'.DS.'SqlBack');
-        import('dbbackup/SqlBack',EXTEND_PATH);
-        // Loader::import('SqlBack',EXTEND_PATH);
-        $this->sqlback = new \SqlBack(config('database.hostname'), config('database.username'), config('database.password'), config('database.database'), config('database.hostport'), config('database.charset'), $this->dir);
     }
 
     /**
@@ -44,7 +36,7 @@ class DbBackupController extends AdminBaseController
     */
     public function index()
     {
-        $list = $this->sqlback->lists($this->dir);
+        $list = SqlBack::lists($this->dir);
 
         $this->assign('list',$list);
 
@@ -52,53 +44,80 @@ class DbBackupController extends AdminBaseController
         // $this->display();
     }
 
+    public function test()
+    {
+        // $this->dir;
+        // $config = config('database');
+        // $connect = Db::connect($config);
+        // $connect =  Db::connect([], true);
+
+        // $dbName =$connect->getConfig('database') . '.';
+        // dump($dbName);die;
+        
+        // $tables = $connect->query("show tables");
+        // dump($tables);die;
+        // var_dump($tables);die;
+
+        $qb = new SqlBack();
+        $result = $qb->backup();
+        // $result = $qb->restore();
+        dump($result);die;
+
+    }
+
+    /*获取视图信息 借助Db类库*/
+    public function schema()
+    {
+        $connect = Db::connect(config('database'));
+        $tables = $connect->getTables();
+        $dbName = $connect->getConfig('database') . '.';
+        $dir = RUNTIME_PATH . 'schema';
+        $dir2 = $dir . DS . $dbName;
+
+        foreach ($tables as $table) {
+            $content = '<?php ' . PHP_EOL . 'return ';
+            $info    = $connect->getFields($dbName . $table);
+            $content .= var_export($info, true) . ';';
+            if (!is_dir($dir)) {
+                mkdir($dir);
+            }
+            // echo $dir2 . $table . EXT;die;
+            file_put_contents($dir2 . $table . EXT, $content);
+        }
+    }
+
     /**
      * 数据库备份 backup
-     * @adminMenu(
-     *     'name'   => '数据库备份',
-     *     'parent' => 'index',
-     *     'display'=> false,
-     *     'hasView'=> true,
-     *     'order'  => 10000,
-     *     'icon'   => '',
-     *     'remark' => '数据库备份',
-     *     'param'  => ''
-     * )
-     */
+    */
     public function export()
     {
-        //设置超时时间为0，表示一直执行。当php在safe mode模式下无效，此时可能会导致导入超时，此时需要分段导入
-        set_time_limit(0);
-
-        // $result = true;
-        $result = $this->sqlback->backup();
+        $qb = new SqlBack();
+        $result = $qb->backup();
         if ($result===false) {
             $this->error('数据备份失败！',url('DbBackup/index'));
         }
         $this->success('数据备份成功',url('DbBackup/index'));
     }
+    /*备份所选表的数据*/
+    public function exportSelect()
+    {
+        $ids = $this->request->param('ids/a');
+
+        return true;
+    }
+
 
     /**
      * 数据库还原 restore
-     * @adminMenu(
-     *     'name'   => '数据库还原',
-     *     'parent' => 'index',
-     *     'display'=> false,
-     *     'hasView'=> true,
-     *     'order'  => 10000,
-     *     'icon'   => '',
-     *     'remark' => '数据库还原',
-     *     'param'  => ''
-     * )
-     */
+    */
     public function import()
     {
-        set_time_limit(0);
         $file = $this->request->param('fname');
         $file = $this->dir . $file;
 
         if(is_file($file)){
-            $result = $this->sqlback->restore($file);
+            $qb = new SqlBack();
+            $result = $qb->restore($file);
             if ($result===false) {
                 $this->error('数据备份失败！',url('DbBackup/index'));
             }
@@ -110,17 +129,7 @@ class DbBackupController extends AdminBaseController
 
     /**
      * 删除备份
-     * @adminMenu(
-     *     'name'   => '删除备份',
-     *     'parent' => 'index',
-     *     'display'=> false,
-     *     'hasView'=> true,
-     *     'order'  => 10000,
-     *     'icon'   => '',
-     *     'remark' => '删除备份',
-     *     'param'  => ''
-     * )
-     */
+    */
     public function delete()
     {
         $param = $this->request->param();
