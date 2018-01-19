@@ -43,6 +43,9 @@ class AdminHeroController extends AdminBaseController
 
     public function add()
     {
+        $heroPosition = $smodel->getHeroPosition([1]);
+
+        $this->assign('heroPosition',$heroPosition);
         return $this->fetch();
     }
     public function addPost()
@@ -65,7 +68,9 @@ class AdminHeroController extends AdminBaseController
         $id = $this->request->param('id',0,'intval');
         $smodel = new LolHeroModel();
         $post = $smodel->getPost($id);
+        $heroPosition = $smodel->getHeroPosition([1]);
 
+        $this->assign('heroPosition',$heroPosition);
         $this->assign('post',$post);
         return $this->fetch();
     }

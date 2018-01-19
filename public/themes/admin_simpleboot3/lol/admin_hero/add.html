@@ -38,16 +38,13 @@
             <div class="col-md-9">
                 <table class="table table-bordered">
                     <tr>
-                        <th width="100">英雄称谓<span class="form-required">*</span></th>
-                        <td>
+                        <th width="10%" align="right">英雄称谓<span class="form-required">*</span></th>
+                        <td width="47%">
                             <input class="form-control" type="text" name="post[hchampion]" value="" placeholder="英雄称谓" required/>
                         </td>
-                    </tr>
-                    <tr>
-                        <th>中文名</th>
-                        <td>
+                        <th width="8%" align="right">中文名</th>
+                        <td width="35%">
                             <input class="form-control" type="text" name="post[hname]" value="" placeholder="中文名">
-                            <p class="help-block">中文名</p>
                         </td>
                     </tr>
                     <tr>
@@ -55,8 +52,6 @@
                         <td>
                             <input class="form-control" type="text" name="post[hcname]" value="" placeholder="">
                         </td>
-                    </tr>
-                    <tr>
                         <th>曾用名</th>
                         <td>
                             <input class="form-control" type="text" name="post[oldername]" value="" placeholder="">
@@ -66,7 +61,7 @@
                     <tr>
                         <th>英雄定位</th>
                         <td>
-                            <input class="form-control" type="text" name="post[hname]" value="" placeholder="">
+                            <input class="form-control" type="text" name="post[hposition]" value="" placeholder="">
                         </td>
                     </tr>
 
@@ -80,8 +75,6 @@
                                 </foreach>
                             </select>
                         </td>
-                    </tr>
-                    <tr>
                         <th>金币</th>
                         <php>$gold = config('gold');</php>
                         <td>
@@ -92,7 +85,8 @@
                             </select>
                         </td>
                     </tr>
-
+                </table>
+                <table class="table table-bordered">
                     <tr>
                         <th>描述</th>
                         <td>

@@ -53,5 +53,12 @@ class LolHeroModel extends ComModel
         return $list;
     }
 
+    public function getHeroPosition($status=[],$option=false)
+    {
+        $options = $this->getStatus($status,'heroposition','checkbox',$option);
+
+        return $options;
+    }
+
 
 }

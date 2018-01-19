@@ -96,23 +96,35 @@ class ComModel extends Model
     }
 
     // 状态
-    public function getStatus($status='',$config='trade_order_status')
+    public function getStatus($status='',$config='trade_order_status', $type='select', $option='')
     {
         if (is_array($config)) {
             $ufoconfig = $config;
         } elseif (empty(config('?'.$config))) {
             return false;
-        } else {
-            $ufoconfig = config($config);
         }
-        $status = intval($status);
+        $ufoconfig = config($config);
+        if ($option===false) {
+            return $ufoconfig;
+        }
+
         $options = '';
-        foreach ($ufoconfig as $key => $vo) {
-            $options .= '<option value="'.$key.'" '.($status==$key?'selected':'').'>'.$vo.'</option>';
+        if ($type=='select') {
+            $status = intval($status);
+            $options = (empty($option)) ? '':'<option value="">--'.$option.'--</option>';
+            foreach ($ufoconfig as $key => $vo) {
+                $options .= '<option value="'.$key.'" '.($status==$key?'selected':'').'>'.$vo.'</option>';
+            }
+        } elseif ($type=='checkbox') {
+            $status = (array)$status;
+            foreach ($ufoconfig as $key => $vo) {
+                $options .= '<input type="checkbox" name="ids[]" value="'.$key.'" '.(in_array($key,$status)?'checked':'').'> '.$vo.' &nbsp; &nbsp;';
+            }
         }
 
         return $options;
     }
+    // 多选
 
     // 选择框
     public function createOptions($selectId=0, $option='', $data=[])
