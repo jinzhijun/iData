@@ -6,9 +6,9 @@ use think\Db;
 
 /**
 * 我的媒体中心
-* 书籍
+* 视频
 */
-class BookController extends HomeBaseController
+class VideoController extends HomeBaseController
 {
     public function index()
     {

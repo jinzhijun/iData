@@ -6,11 +6,15 @@ use think\Db;
 
 /**
 * 我的媒体中心
-* 书籍
+* 图片
 */
-class BookController extends HomeBaseController
+class DcimController extends HomeBaseController
 {
     public function index()
+    {
+        return $this->fetch();
+    }
+    public function album()
     {
         return $this->fetch();
     }

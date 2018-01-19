@@ -1,25 +1,27 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>唯美爱情表白</title>
-    <link type="text/css" rel="stylesheet" href="renxi/default.css">
-    <script type="text/javascript" src="renxi/jquery.min.js"></script>
-    <script type="text/javascript" src="renxi/jscex.min.js"></script>
-    <script type="text/javascript" src="renxi/jscex-parser.js"></script>
-    <script type="text/javascript" src="renxi/jscex-jit.js"></script>
-    <script type="text/javascript" src="renxi/jscex-builderbase.min.js"></script>
-    <script type="text/javascript" src="renxi/jscex-async.min.js"></script>
-    <script type="text/javascript" src="renxi/jscex-async-powerpack.min.js"></script>
-    <script type="text/javascript" src="renxi/functions.js" charset="utf-8"></script>
-    <script type="text/javascript" src="renxi/love.js" charset="utf-8"></script>
+    <title>芳 - Lothar - {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <base target="_blank" />
+    <include file="public@head"/>
+    <link type="text/css" rel="stylesheet" href="__TMPL__/idata/f511/renxi/default.css">
+    <script type="text/javascript" src="__TMPL__/idata/f511/renxi/jscex.min.js"></script>
+    <script type="text/javascript" src="__TMPL__/idata/f511/renxi/jscex-parser.js"></script>
+    <script type="text/javascript" src="__TMPL__/idata/f511/renxi/jscex-jit.js"></script>
+    <script type="text/javascript" src="__TMPL__/idata/f511/renxi/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="__TMPL__/idata/f511/renxi/jscex-async.min.js"></script>
+    <script type="text/javascript" src="__TMPL__/idata/f511/renxi/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="__TMPL__/idata/f511/renxi/functions.js" charset="utf-8"></script>
+    <script type="text/javascript" src="__TMPL__/idata/f511/renxi/love.js" charset="utf-8"></script>
     <style type="text/css">
         /*.STYLE1{color:#666666;}*/
     </style>
 </head>
 <body>
     <audio autoplay="autopaly">
-        <source src="renxi/renxi.mp3" type="audio/mp3" />
+        <source src="__TMPL__/idata/f511/renxi/renxi.mp3" type="audio/mp3" />
     </audio>
     <div id="main">
         <div id="error">本页面采用HTML5编辑，目前您的浏览器无法显示，请换成谷歌(Chrome)或者火狐(Firefox)浏览器，或者其他游览器的最新版本。</div>
@@ -27,23 +29,30 @@
             <div id="text">
                 <div id="code">
                     <font color="#FF0000">
-                        <span class="say">亲爱的小宝宝，我爱你，虽然你看不见我对你的告白</span><br>
-                        <span class="say"> </span><br>
-                        <span class="say"> 我知道我不会甜言蜜语，但是我会用行动证明一切</span><br>
-                        <span class="say"> </span><br>
-                        <span class="say">你说我啰嗦，有些东西因为越在乎所以越失去</span><br>
-                        <span class="say">因为我太爱你了，所以我失去你了</span><br>
-                        <span class="say">因为我太啰嗦了，所以你离开了我</span><br>
-                        <span class="say">虽然你看不见我的告白，但是我还是要把这些心里话说出来</span><br>
-                        <span class="say"> </span><br>
-                        <span class="say"><span class="space"></span> -- 爱你的仁希--</span>
+                        <span class="say">亲爱的小芳</span><br>
+                        <!-- 回忆 -->
+                        <span class="say"> 我很少对一个人如此关心。</span><br>
+                        <span class="say"> 谢谢你，让我想变成更好的人。</span><br>
+                        <!-- 甜蜜的话 -->
+                        <span class="say"> 无论我本人多么平庸，我总觉得对你的爱很美。</span><br>
+                        <span class="say"></span><br>
+                        <!-- 共同生活 -->
+                        <span class="say"> The problems of you past are you business.</span><br>
+                        <span class="say"> The problems of you future are my privilege.</span><br><br>
+                        <!-- 思念时 -->
+                        <span class="say"> When you feel alone,just look at the spaces between your fingers.</span><br>
+                        <span class="say"> And remember that is where my fingers fit perfectly.</span><br>
+                        <!-- 陪伴一生 -->
+                        <span class="say"> 小芳，只要你愿意，我会一直陪着你。</span><br>
+                        <span class="say"></span><br>
+                        <span class="say"><span class="space"></span> -- 爱你的夏夏❤️--</span>
                     </font>
                 </div>
             </div>
             <div id="clock-box">
                 <span class="STYLE1"></span>
-                <font color="#33CC00">亲爱的小宝宝，我喜欢你</font>
-                <span class="STYLE1">已经是……</span>
+                <font color="#33CC00">截至今天我们已经</font>
+                <span class="STYLE1">默默走过了</span>
                 <div id="clock"></div>
             </div>
             <canvas id="canvas" width="1100" height="680"></canvas>
@@ -104,7 +113,20 @@
             var foot = tree.footer;
             var hold = 1;
 
+            // function runCanvas(e) {
+            //     var offset = canvas.offset(), x, y;
+            //     x = e.pageX - offset.left;
+            //     y = e.pageY - offset.top;
+            //     if (seed.hover(x, y)) {
+            //         hold = 0; 
+            //         canvas.unbind("click");
+            //         canvas.unbind("mousemove");
+            //         canvas.removeClass('hand');
+            //     }
+            // }
+            // runCanvas(e);
             canvas.click(function(e) {
+                // console.log(e);
                 var offset = canvas.offset(), x, y;
                 x = e.pageX - offset.left;
                 y = e.pageY - offset.top;
@@ -114,7 +136,8 @@
                     canvas.unbind("mousemove");
                     canvas.removeClass('hand');
                 }
-            }).mousemove(function(e){
+            });
+            canvas.mousemove(function(e){
                 var offset = canvas.offset(), x, y;
                 x = e.pageX - offset.left;
                 y = e.pageY - offset.top;
@@ -179,7 +202,7 @@
 
             var textAnimate = eval(Jscex.compile("async", function () {
                 var together = new Date();
-                together.setFullYear(2010,1 , 15); //时间年月日
+                together.setFullYear(2017,5,30); //时间年月日
                 together.setHours(16); //小时 
                 together.setMinutes(53); //分钟
                 together.setSeconds(0); //秒前一位

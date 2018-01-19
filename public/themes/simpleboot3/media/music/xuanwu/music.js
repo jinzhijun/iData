@@ -6,6 +6,8 @@ window.requestAnimationFrame = window.requestAnimationFrame ||
 								window.mozRequestAnimationFrame || 
 								window.msRequestAnimationFrame;
 window.onload = function(){
+	var xuanwu = GV.TMPL+'/media/music/';
+	var playicon = GV.TMPL+'/media/music/xuanwu/images/';
 	var oBtn = id("play");
 	var audio = id("audio");
 	var m_star = id("m_star").getElementsByTagName("img")[0];
@@ -22,11 +24,11 @@ window.onload = function(){
 		if (mark)
 		{
 			audio.play();
-			this.style.backgroundImage = "url(xuanwu/images/zan.png)";
+			this.style.backgroundImage = 'url'+playicon+'zan.png)';
 			m_star.className = "rotate";
 		}else{
 			audio.pause();
-			this.style.backgroundImage = "url(xuanwu/images/play.png)";
+			this.style.backgroundImage = 'url'+playicon+'play.png)';
 			m_star.className = "";
 		}
 		mark = !mark;
@@ -45,13 +47,13 @@ window.onload = function(){
 	}
 	
 	function playing(n){
-		audio.src = data[n].src;
-		m_gm.innerHTML = data[n].name;
-		m_singer.innerHTML = data[n].singer;
-		m_star.src = data[n].star; 
-		txt = data[n].lrc;
+		audio.src			= xuanwu+data[n].src;
+		m_gm.innerHTML		= data[n].name;
+		m_singer.innerHTML	= data[n].singer;
+		m_star.src			= xuanwu+data[n].star; 
+		txt					= data[n].lrc;
 		m_star.className = "rotate";
-		oBtn.style.backgroundImage = "url(xuanwu/images/zan.png)";
+		oBtn.style.backgroundImage = 'url'+playicon+'zan.png)';
 		mark = false;
 		lrcCon.style.marginTop = 20 + "px";
 		currentLrc();
@@ -206,7 +208,6 @@ window.onload = function(){
 	draw();
 	
 	//歌词同步
-	
 	function currentLrc(){
 		var lrcArr = txt.split("[");
 		//console.log(lrcArr);

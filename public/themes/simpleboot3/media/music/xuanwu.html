@@ -4,13 +4,26 @@
 	<meta charset="UTF-8">
 	<meta name="keywords" content="关键词">
 	<meta name="description" content="描述">
-	<title>玄武音乐播放器</title>
-	<link rel="stylesheet" type="text/css" href="xuanwu/css/xuanwu.css">
-	<script src="xuanwu/js/data.js"></script>
-	<script src="xuanwu/js/music.js"></script>
+	<title>玄武音乐播放器 - Lothar</title>
+
+	<link rel="stylesheet" type="text/css" href="__TMPL__/media/music/xuanwu/xuanwu.css">
+
+	<!--[if lt IE 9]>
+	<script src="__STATIC__/html5shiv.js"></script>
+	<![endif]-->
+	<script type="text/javascript">
+	    //全局变量
+	    var GV = {
+	        // ROOT: "__ROOT__/",
+	        // WEB_ROOT: "__WEB_ROOT__/",
+	        // JS_ROOT: "static/js/",
+	        TMPL: "__TMPL__"
+	    };
+	</script>
+	<script src="__TMPL__/media/music/xuanwu/data.js"></script>
+	<script src="__TMPL__/media/music/xuanwu/music.js"></script>
 </head>
-<body><!--身体-->
-	<canvas id="bgCanvas"></canvas>
+<body>
 	<div class="music">
 		<h1 class="title">音乐播放器</h1>
 		<div class="main">
@@ -19,7 +32,7 @@
 				<div class="m_sing">
 					<p id="m_gm">海阔天空</p>
 					<p id="m_singer">Beyond</p>
-					<div id="m_star"><img src="xuanwu/images/1.jpg"></div>
+					<div id="m_star"><img src="__TMPL__/media/music/xuanwu/images/1.jpg"></div>
 					<canvas id="canvas" width="400" height="200"></canvas>
 				</div>
 			</div>
@@ -69,10 +82,13 @@
 			</div>
 		</div>
 	</div>
-    <audio autoplay="autopaly" id="audio">
-        <source src="xuanwu/audio/1.mp3" type="audio/mp3" />
-    </audio>
-	<!-- <audio src="xuanwu/audio/1.mp3" id="audio"></audio> -->
-	<script src="xuanwu/js/canvasBg.js"></script>
+	<audio src="__TMPL__/media/music/xuanwu/audio/1.mp3" id="audio"></audio>
+    <!-- <audio autoplay="autopaly" id="audio">
+        <source src="__TMPL__/media/music/xuanwu/audio/1.mp3" type="audio/mp3" />
+    </audio> -->
+
+	<!-- 绘制背景特效 -->
+	<canvas id="bgCanvas"></canvas>
+	<script src="__TMPL__/media/music/xuanwu/canvasBg.js"></script>
 </body>
 </html>
