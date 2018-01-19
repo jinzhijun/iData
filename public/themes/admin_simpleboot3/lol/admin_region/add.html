@@ -30,23 +30,30 @@
 <body>
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
-        <li><a href="{:url('AdminMode/index')}">模式管理</a></li>
-        <li class="active"><a href="{:url('AdminMode/add')}">添加模式</a></li>
+        <li><a href="{:url('AdminRegion/index')}">大区管理</a></li>
+        <li class="active"><a href="{:url('AdminRegion/add')}">添加大区</a></li>
     </ul>
-    <form action="{:url('AdminMode/addPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
+    <form action="{:url('AdminRegion/addPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
         <div class="row">
             <div class="col-md-9">
                 <table class="table table-bordered">
                     <tr>
-                        <th width="100">模式名<span class="form-required">*</span></th>
+                        <th width="100">大区名<span class="form-required">*</span></th>
                         <td>
                             <input class="form-control" type="text" name="post[name]" value="" placeholder="" required/>
                         </td>
                     </tr>
                     <tr>
-                        <th>备用信息</th>
+                        <th>牌号</th>
                         <td>
-                            <input class="form-control" type="text" name="post[hname]" value="">
+                            <input class="form-control" type="text" name="post[mark]" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>网络类型</th>
+                        <td>
+                            <input class="form-control" type="text" name="post[nettype]" value="">
+                            <p class="help-block">网络类型：电信、网通、移动、全区</p>
                         </td>
                     </tr>
 
@@ -88,7 +95,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
-                <a class="btn btn-default" href="{:url('AdminMode/index')}">{:lang('BACK')}</a>
+                <a class="btn btn-default" href="{:url('AdminRegion/index')}">{:lang('BACK')}</a>
             </div>
         </div>
     </form>

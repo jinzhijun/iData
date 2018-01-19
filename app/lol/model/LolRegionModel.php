@@ -8,7 +8,7 @@ use app\idata\model\ComModel;
 * @param string $field
 * @return object $list 
 */
-class LolModeModel extends ComModel
+class LolRegionModel extends ComModel
 {
     public function getLists($filter=[], $order='', $limit=15, $field='', $extra=[])
     {
@@ -20,9 +20,8 @@ class LolModeModel extends ComModel
         $where = [];
         // $where = ['delete_time'=>0];
         $where = array_merge($where,$extra);
-        $type = empty($filter['cid']) ? 0 : intval($filter['cid']);
         if (!empty($position)) {
-            $where['type'] = ['like', "%$type%"];
+            $where['nettype'] = ['like', "%$type%"];
         }
         $startTime = empty($filter['start_time']) ? 0 : strtotime($filter['start_time']);
         $endTime   = empty($filter['end_time']) ? 0 : strtotime($filter['end_time']);
@@ -41,7 +40,7 @@ class LolModeModel extends ComModel
             $where['name'] = ['like', "%$keyword%"];
         }
 
-        $order = empty($order) ? 'list_order,update_time DESC,id DESC' : $order;
+        $order = empty($order) ? 'list_order,published_time DESC,id DESC' : $order;
 
         $list = $this->field($field)
             // ->join($join)

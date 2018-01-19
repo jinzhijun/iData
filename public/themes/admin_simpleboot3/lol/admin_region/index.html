@@ -3,11 +3,11 @@
 <body>
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="javascript:;">所有模式</a></li>
-        <li><a href="{:url('AdminMode/add')}">添加模式</a></li>
+        <li class="active"><a href="javascript:;">所有大区</a></li>
+        <li><a href="{:url('AdminRegion/add')}">添加大区</a></li>
     </ul>
-    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminMode/index')}">
-        模式类型:
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminRegion/index')}">
+        大区类型:
         <select class="form-control" name="cid" style="width:140px;">
             <option value="">全部</option>
             {$cate_tree|default=''}
@@ -23,13 +23,13 @@
         <input type="text" class="form-control" name="keyword" style="width:300px;"
                value="{:input('request.keyword/s','')}" placeholder="称谓、中文名、别名、曾用名...">
         <input type="submit" class="btn btn-primary" value="搜索"/>
-        <a class="btn btn-danger" href="{:url('AdminMode/index')}">清空</a>
+        <a class="btn btn-danger" href="{:url('AdminRegion/index')}">清空</a>
     </form>
     <form class="js-ajax-form" action="" method="post">
-        <include file="admin_mode/table-actions"/>
+        <include file="admin_region/table-actions"/>
         <table class="table table-hover table-bordered table-list">
             <thead>
-                <include file="admin_mode/table-th"/>
+                <include file="admin_region/table-th"/>
             </thead>
             <foreach name="list" item="vo">
                 <tr>
@@ -42,10 +42,9 @@
                     <td>
                         <a>{$vo.name}</a>
                     </td>
+                    <td>{$vo.mark}</td>
 
-                    <td>{$vo.type}</td>
-                    <td>{$vo.alternate}</td>
-                    <td>{$vo.description}</td>
+                    <td>{$vo.nettype}</td>
                     <td>
                         <empty name="vo.published_time">
                             未知
@@ -56,21 +55,21 @@
                     <td>
                         <notempty name="vo.status">
                             <a data-toggle="tooltip" title="显示"><i class="fa fa-check"></i></a>
-                            <else/>
+                        <else/>
                             <a data-toggle="tooltip" title="隐藏"><i class="fa fa-close"></i></a>
                         </notempty>
                     </td>
                     <td>
-                        <a href="{:url('AdminMode/edit',['id'=>$vo.id])}">{:lang('EDIT')}</a>
-                        <a href="{:url('AdminMode/delete',['id'=>$vo.id])}" class="js-ajax-delete">{:lang('DELETE')}</a>
+                        <a href="{:url('AdminRegion/edit',['id'=>$vo.id])}">{:lang('EDIT')}</a>
+                        <a href="{:url('AdminRegion/delete',['id'=>$vo.id])}" class="js-ajax-delete">{:lang('DELETE')}</a>
                     </td>
                 </tr>
             </foreach>
             <tfoot>
-                <include file="admin_mode/table-th"/>
+                <include file="admin_region/table-th"/>
             </tfoot>
         </table>
-        <include file="admin_mode/table-actions"/>
+        <include file="admin_region/table-actions"/>
         <ul class="pagination">{$pager|default=''}</ul>
     </form>
 </div>

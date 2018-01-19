@@ -2,15 +2,15 @@
 namespace app\lol\controller;
 
 use cmf\controller\AdminBaseController;
-use app\lol\model\LolHeroModel;
+use app\lol\model\LolRegionModel;
 use think\Db;
 
 /**
  * 游戏
  * lol
- * 英雄大全
+ * 游戏模式
 */
-class AdminHeroController extends AdminBaseController
+class AdminRegionController extends AdminBaseController
 {
     public function index()
     {
@@ -19,11 +19,12 @@ class AdminHeroController extends AdminBaseController
         $cId = $this->request->param('cid', 0, 'intval');
         // $request = input('request.');
 
-        $smodel = new LolHeroModel();
+        $smodel = new LolRegionModel();
         // 获取列表数据
-        $list = $smodel->getLists($param,'',25);
+        $list = $smodel->getLists($param);
 
-        $cateTree = $smodel->getStatus($cId,'heroposition');
+        $cateTree = '';
+        // $cateTree = $smodel->getStatus($cId,'heroposition');
 // dump($list);die;
 
         // 模板赋值
@@ -43,10 +44,6 @@ class AdminHeroController extends AdminBaseController
 
     public function add()
     {
-        $smodel = new LolHeroModel();
-        $heroPosition = $smodel->getHeroPosition([1]);
-
-        $this->assign('heroPosition',$heroPosition);
         return $this->fetch();
     }
     public function addPost()
@@ -54,24 +51,22 @@ class AdminHeroController extends AdminBaseController
         $data = $this->request->param();
         $post = $data['post'];
 
-        $smodel = new LolHeroModel();
+        $smodel = new LolRegionModel();
         if (!empty($data['photo'])) {
             $post['more']['photos'] = $smodel->dealFiles($data['photo']);
         }
 
         $smodel->insertData($post);
 
-        $this->success('提交成功',url('AdminHero/edit',['id'=>$smodel->id]));
+        $this->success('提交成功',url('AdminRegion/edit',['id'=>$smodel->id]));
     }
 
     public function edit()
     {
         $id = $this->request->param('id',0,'intval');
-        $smodel = new LolHeroModel();
+        $smodel = new LolRegionModel();
         $post = $smodel->getPost($id);
-        $heroPosition = $smodel->getHeroPosition([1]);
 
-        $this->assign('heroPosition',$heroPosition);
         $this->assign('post',$post);
         return $this->fetch();
     }
@@ -80,7 +75,7 @@ class AdminHeroController extends AdminBaseController
         $data = $this->request->param();
         $post = $data['post'];
 
-        $smodel = new LolHeroModel();
+        $smodel = new LolRegionModel();
         if (!empty($data['photo'])) {
             $post['more']['photos'] = $smodel->dealFiles($data['photo']);
         }
@@ -93,21 +88,21 @@ class AdminHeroController extends AdminBaseController
     public function delete()
     {
         $param = $this->request->param();
-        $smodel = new LolHeroModel();
+        $smodel = new LolRegionModel();
 
         if (isset($param['id'])) {
             $id = $this->request->param('id', 0, 'intval');
-            $result = $smodel->field('id,hchampion')->where(['id'=>$id])->find();
+            $result = $smodel->field('id,name')->where(['id'=>$id])->find();
             $log = [
                 'object_id'   => $result['id'],
                 'create_time' => time(),
-                'table_name'  => 'lol_hero',
-                'name'        => $result['hchampion']
+                'table_name'  => 'lol_region',
+                'name'        => $result['name']
             ];
             // 因为不是什么重要的，所以没用事务处理
             $res = $smodel->where(['id'=>$id])->update(['delete_time'=>time()]);
             if (!empty($res)) {
-                Db::name('lol_hero')->where(['id'=>$id])->update(['status'=>0]);
+                Db::name('lol_region')->where(['id'=>$id])->update(['status'=>0]);
                 Db::name('recycleBin')->insert($log);
             }
             $this->success('删除成功！','');
@@ -115,7 +110,7 @@ class AdminHeroController extends AdminBaseController
 
         if (isset($param['ids'])) {
             $ids = $this->request->param('ids/a');
-            $recycle = $smodel->field('id,hchampion')->where(['id'=>['in',$ids]])->select();
+            $recycle = $smodel->field('id,name')->where(['id'=>['in',$ids]])->select();
             // 因为不是什么重要的，所以没用事务处理
             $result = $smodel->where(['id'=>['in',$ids]])->update(['delete_time'=>time()]);
             if (!empty($result)) {
@@ -123,8 +118,8 @@ class AdminHeroController extends AdminBaseController
                     $log = [
                         'object_id'   => $value['id'],
                         'create_time' => time(),
-                        'table_name'  => 'lol_hero',
-                        'name'        => $value['hchampion']
+                        'table_name'  => 'lol_region',
+                        'name'        => $value['name']
                     ];
                     Db::name('recycleBin')->insert($log);
                 }
@@ -137,7 +132,7 @@ class AdminHeroController extends AdminBaseController
     public function change()
     {
         $param = $this->request->param();
-        $smodel = new LolHeroModel();
+        $smodel = new LolRegionModel();
 
         if (isset($param['ids'])) {
             $ids = $this->request->param('ids/a');
@@ -149,7 +144,7 @@ class AdminHeroController extends AdminBaseController
 
     public function listOrder()
     {
-        parent::listOrders(Db::name('lol_hero'));
+        parent::listOrders(Db::name('lol_region'));
         $this->success('排序更新成功！','');
     }
 

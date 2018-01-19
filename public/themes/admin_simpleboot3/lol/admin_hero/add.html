@@ -88,9 +88,9 @@
                 </table>
                 <table class="table table-bordered">
                     <tr>
-                        <th>描述</th>
+                        <th width="100">描述</th>
                         <td>
-                            <textarea class="form-control" name="post[description]" style="height:50px;" placeholder="请填写摘要"></textarea>
+                            <textarea class="form-control" name="post[description]" style="height:50px;" placeholder="请填写描述"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -180,7 +180,8 @@
                         <th></th>
                         <td>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="post[status]" value="1" checked>发布</label>
+                                <label><input type="radio" name="post[status]" value="1" checked>显示</label>
+                                <label><input type="radio" name="post[status]" value="0">隐藏</label>
                             </div>
                         </td>
                     </tr>
@@ -188,7 +189,8 @@
                         <th></th>
                         <td>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="post[is_top]" value="1">置顶</label>
+                                <label><input type="radio" name="post[is_top]" value="1">置顶</label>
+                                <label><input type="radio" name="post[is_top]" value="0">取消置顶</label>
                             </div>
                         </td>
                     </tr>
@@ -196,7 +198,8 @@
                         <th></th>
                         <td>
                             <div class="checkbox">
-                                <label><input type="checkbox" name="post[is_rec]" value="1">推荐</label>
+                                <label><input type="radio" name="post[is_rec]" value="1">推荐</label>
+                                <label><input type="radio" name="post[is_rec]" value="0">取消推荐</label>
                             </div>
                         </td>
                     </tr>

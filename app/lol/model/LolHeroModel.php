@@ -12,7 +12,7 @@ class LolHeroModel extends ComModel
 {
     public function getLists($filter=[], $order='', $limit=15, $field='', $extra=[])
     {
-        $field = empty($field) ? 'id,hchampion,hname,hcname,oldername,hvoucher,hgold,hposition,wpct,hard,description,published_time,is_top,is_rec,status,more': $field;
+        $field = empty($field) ? 'id,hchampion,hname,hcname,oldername,hvoucher,hgold,hposition,wpct,hard,description,published_time,is_top,is_rec,status,more,list_order': $field;
         $where = ['delete_time'=>0];
         // $join = [
         //     ['__USER__ u', 'a.user_id = u.id']
@@ -42,7 +42,7 @@ class LolHeroModel extends ComModel
             $where['hchampion|hname|hcname|oldername'] = ['like', "%$keyword%"];
         }
 
-        $order = empty($order) ? 'update_time DESC,id DESC' : $order;
+        $order = empty($order) ? 'is_top DESC,is_rec DESC,list_order,update_time DESC,id DESC' : $order;
 
         $list = $this->field($field)
             // ->join($join)

@@ -30,36 +30,46 @@
 <body>
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
-        <li><a href="{:url('AdminMode/index')}">模式管理</a></li>
-        <li class="active"><a href="{:url('AdminMode/add')}">添加模式</a></li>
+        <li><a href="{:url('AdminRegion/index')}">大区管理</a></li>
+        <li>
+            <a href="{:url('AdminRegion/add')}">添加大区</a>
+        </li>
+        <li class="active"><a href="#">编辑大区</a></li>
     </ul>
-    <form action="{:url('AdminMode/addPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
+    <form action="{:url('AdminRegion/editPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
         <div class="row">
             <div class="col-md-9">
                 <table class="table table-bordered">
                     <tr>
-                        <th width="100">模式名<span class="form-required">*</span></th>
+                        <th width="100">大区名<span class="form-required">*</span></th>
                         <td>
-                            <input class="form-control" type="text" name="post[name]" value="" placeholder="" required/>
+                            <input class="form-control" type="text" name="post[name]" value="{$post.name}" placeholder="" required/>
                         </td>
                     </tr>
                     <tr>
-                        <th>备用信息</th>
+                        <th>牌号</th>
                         <td>
-                            <input class="form-control" type="text" name="post[hname]" value="">
+                            <input class="form-control" type="text" name="post[mark]" value="{$post.mark}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>网络类型</th>
+                        <td>
+                            <input class="form-control" type="text" name="post[nettype]" value="{$post.nettype}">
+                            <p class="help-block">网络类型：电信、网通、移动、全区</p>
                         </td>
                     </tr>
 
                     <tr>
                         <th>描述</th>
                         <td>
-                            <textarea class="form-control" name="post[description]" style="height:50px;" placeholder="请填写描述"></textarea>
+                            <textarea class="form-control" name="post[description]" style="height:50px;" placeholder="请填写描述">{$post.description}</textarea>
                         </td>
                     </tr>
                     <tr>
                         <th>内容</th>
                         <td>
-                            <script type="text/plain" id="content" name="post[content]"></script>
+                            <script type="text/plain" id="content" name="post[content]">{$post.content}</script>
                         </td>
                     </tr>
                 </table>
@@ -69,16 +79,20 @@
                     <tr>
                         <th>发布时间</th>
                         <td>
-                            <input class="form-control js-bootstrap-datetime" type="text" name="post[published_time]" value="">
+                            <input class="form-control js-bootstrap-datetime" type="text" name="post[published_time]"
+                                   value="{$post.published_time?=date('Y-m-d H:i',$post.published_time)}">
                         </td>
                     </tr>
 
                     <tr>
                         <th><b>状态</b></th>
+                    </tr>
+                    <tr>
+                        <th></th>
                         <td>
                             <div class="checkbox">
-                                <label><input type="radio" name="post[status]" value="1" checked>显示</label>
-                                <label><input type="radio" name="post[status]" value="0">隐藏</label>
+                                <label><input type="radio" name="post[status]" value="1" {$post.status==1?='checked'}>显示</label>
+                                <label><input type="radio" name="post[status]" value="0" {$post.status==0?='checked'}>隐藏</label>
                             </div>
                         </td>
                     </tr>
@@ -87,8 +101,9 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
-                <a class="btn btn-default" href="{:url('AdminMode/index')}">{:lang('BACK')}</a>
+                <input type="hidden" name="post[id]" value="{$post.id}">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                <a class="btn btn-default" href="javascript:history.back(-1);">{:lang('BACK')}</a>
             </div>
         </div>
     </form>
