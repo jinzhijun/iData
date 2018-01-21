@@ -21,7 +21,7 @@
                style="width:140px;" autocomplete="off"> &nbsp; &nbsp;
         关键字:
         <input type="text" class="form-control" name="keyword" style="width:300px;"
-               value="{:input('request.keyword/s','')}" placeholder="称谓、中文名、别名、曾用名...">
+               value="{:input('request.keyword/s','')}" placeholder="称谓、中文名、别名、曾用名……">
         <input type="submit" class="btn btn-primary" value="搜索"/>
         <a class="btn btn-danger" href="{:url('AdminHero/index')}">清空</a>
     </form>
@@ -83,7 +83,7 @@
                         </notempty>
                     </td>
                     <td>
-                        <a href="{:url('AdminHero/edit',['id'=>$vo.id])}">{:lang('EDIT')}</a>
+                        <a href="{:url('AdminHero/edit',['id'=>$vo.id])}">{:lang('EDIT')}</a> &nbsp; 
                         <a href="{:url('AdminHero/delete',['id'=>$vo.id])}" class="js-ajax-delete">{:lang('DELETE')}</a>
                     </td>
                 </tr>

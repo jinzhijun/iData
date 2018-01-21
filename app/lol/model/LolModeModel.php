@@ -19,7 +19,6 @@ class LolModeModel extends ComModel
 
         $where = [];
         // $where = ['delete_time'=>0];
-        $where = array_merge($where,$extra);
         $type = empty($filter['cid']) ? 0 : intval($filter['cid']);
         if (!empty($position)) {
             $where['type'] = ['like', "%$type%"];
@@ -40,8 +39,10 @@ class LolModeModel extends ComModel
         if (!empty($keyword)) {
             $where['name'] = ['like', "%$keyword%"];
         }
+        $where = array_merge($where,$extra);
 
         $order = empty($order) ? 'list_order,update_time DESC,id DESC' : $order;
+        $limit = $this->getLimitCom($limit);
 
         $list = $this->field($field)
             // ->join($join)
@@ -50,6 +51,16 @@ class LolModeModel extends ComModel
             ->paginate($limit);
 
         return $list;
+    }
+
+    public function getOptions($selectId=0, $option='')
+    {
+        $where = [
+            'status' => 1
+        ];
+        $data = $this->field('id,name')->where($where)->select()->toArray();
+        $options = $this->createOptions($selectId, $option, $data);
+        return $options;
     }
 
 

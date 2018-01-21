@@ -1,0 +1,18 @@
+<div class="table-actions">
+    <!-- <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
+            data-action="{:url('AdminMatch/change',['status'=>1])}" data-subcheck="true">显示
+    </button>
+    <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
+            data-action="{:url('AdminMatch/change',['status'=>0])}" data-subcheck="true">隐藏
+    </button> -->
+    <!--
+    <notempty name="category">
+        <button class="btn btn-primary btn-sm js-articles-move" type="button">批量移动</button>
+    </notempty>
+    <button class="btn btn-primary btn-sm js-articles-copy" type="button">批量复制</button>
+    -->
+    <button class="btn btn-danger btn-sm js-ajax-submit" type="submit"
+            data-action="{:url('AdminMatch/delete')}" data-subcheck="true" data-msg="您确定删除吗？">
+        {:lang('DELETE')}
+    </button>
+</div>

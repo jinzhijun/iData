@@ -8,7 +8,7 @@ use think\Db;
 /**
  * 游戏
  * lol
- * 游戏模式
+ * 游戏大区
 */
 class AdminRegionController extends AdminBaseController
 {

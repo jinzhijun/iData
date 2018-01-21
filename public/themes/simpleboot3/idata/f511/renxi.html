@@ -29,12 +29,12 @@
             <div id="text">
                 <div id="code">
                     <font color="#FF0000">
-                        <span class="say">亲爱的小芳</span><br>
+                        <span class="say">亲爱的小芳：</span><br>
                         <!-- 回忆 -->
                         <span class="say"> 我很少对一个人如此关心。</span><br>
                         <span class="say"> 谢谢你，让我想变成更好的人。</span><br>
                         <!-- 甜蜜的话 -->
-                        <span class="say"> 无论我本人多么平庸，我总觉得对你的爱很美。</span><br>
+                        <span class="say"> 无论我身处何地，有你就很幸福。</span><br>
                         <span class="say"></span><br>
                         <!-- 共同生活 -->
                         <span class="say"> The problems of you past are you business.</span><br>
@@ -45,7 +45,7 @@
                         <!-- 陪伴一生 -->
                         <span class="say"> 小芳，只要你愿意，我会一直陪着你。</span><br>
                         <span class="say"></span><br>
-                        <span class="say"><span class="space"></span> -- 爱你的夏夏❤️--</span>
+                        <span class="say"><span class="space"></span> -- 爱你的夏夏❤️ --</span>
                     </font>
                 </div>
             </div>
@@ -55,6 +55,7 @@
                 <span class="STYLE1">默默走过了</span>
                 <div id="clock"></div>
             </div>
+            <div style="color:#F00;font-size:18px;" id="click_heart">请触碰我挚爱的心：</div>
             <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
     </div>
@@ -127,6 +128,7 @@
             // runCanvas(e);
             canvas.click(function(e) {
                 // console.log(e);
+                $('#click_heart').hide();
                 var offset = canvas.offset(), x, y;
                 x = e.pageX - offset.left;
                 y = e.pageY - offset.top;

@@ -26,10 +26,8 @@ class ComModel extends Model
         return htmlspecialchars(cmf_replace_content_file_url(htmlspecialchars_decode($value), true));
     }
     // 自动完成
-    public function setPublishedTimeAttr($value)
-    {
-        return strtotime($value);
-    }
+    public function setPublishedTimeAttr($value){ return strtotime($value); }
+    public function setSTimeAttr($value){ return strtotime($value); }
 
 
     // 添加数据
@@ -86,6 +84,12 @@ class ComModel extends Model
         }
 
         return $post;
+    }
+
+    // 全局分页数
+    public function getLimitCom($limit='')
+    {
+        return empty($limit) ? config('progress_bar')['max'] : $limit;
     }
 
     // 处理用户名 user_nickname|user_login|user_email|mobile

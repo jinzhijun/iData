@@ -1,0 +1,99 @@
+<include file="public@header"/>
+</head>
+
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('AdminMatch/index')}">比赛管理</a></li>
+        <li class="active"><a href="{:url('AdminMatch/add')}">添加比赛</a></li>
+    </ul>
+    <form action="{:url('AdminMatch/addPost')}" method="post" class="form-horizontal js-ajax-form margin-top-20">
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="100">比赛模式</th>
+                        <td>
+                            <select class="form-control" style="width:160px;" name="post[mode_id]">
+                                {$cate_tree|default=''}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>比赛结果</th>
+                        <td>
+                            <label><input type="radio" name="post[result]" value="1" checked> 胜利</label> &nbsp; &nbsp;
+                            <label><input type="radio" name="post[result]" value="0"> 失败</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>描述</th>
+                        <td>
+                            <textarea class="form-control" name="post[description]" style="height:50px;" placeholder="请填写描述"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="100">击杀</th>
+                        <td>
+                            <input class="form-control" type="text" name="post[kills]" value="">
+                        </td>
+                        <th>助攻</th>
+                        <td>
+                            <input class="form-control" type="text" name="post[assist]" value="">
+                        </td>
+                        <th>死亡</th>
+                        <td>
+                            <input class="form-control" type="text" name="post[die]" value="">
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>开始时间</th>
+                        <td>
+                            <input class="form-control js-bootstrap-datetime" type="text" name="post[s_time]" value="{:date('Y-m-d H:i',time())}">
+                        </td>
+                        <th>游戏时长</th>
+                        <td>
+                            <input class="form-control" type="text" name="post[duration]" value="">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-3">
+                <table class="table table-bordered">
+                    <tr>
+                        <th><b>状态</b></th>
+                        <td>
+                            <div class="checkbox">
+                                <label><input type="radio" name="post[status]" value="1" checked>显示</label>
+                                <label><input type="radio" name="post[status]" value="0">隐藏</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <div class="checkbox">
+                                <label><input type="radio" name="post[is_rec]" value="1" checked>推荐</label>
+                                <label><input type="radio" name="post[is_rec]" value="0">不推荐</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                <a class="btn btn-default" href="{:url('AdminMatch/index')}">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

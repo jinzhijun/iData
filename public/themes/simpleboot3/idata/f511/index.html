@@ -1,1 +1,27 @@
-f511 - love
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>芳 - Lothar - Love - {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <!-- <base target="_blank" /> -->
+    <include file="public@head"/>
+
+    <style type="text/css">
+        .lovea{margin-left:10%;color: red;}
+    </style>
+</head>
+<body class="body-white">
+    <div class="container tc-main">
+        <div class="row">
+            <div class="col-md-6">
+                <if condition="cmf_is_mobile()===true">
+                    <div>请在电脑上打开，效果更佳……</div>
+                <else/>
+                </if>
+                <a class="lovea" href="{:url('renxi')}">通向爱的链接>></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
