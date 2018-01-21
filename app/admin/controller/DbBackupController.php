@@ -174,6 +174,8 @@ class DbBackupController extends AdminBaseController
         header("Content-Disposition: attachment; filename={$filename}");
         $size = readfile($file);
         header("Accept-Length:". $size);
+        ob_end_flush();
+        exit;
     }
 
 }
