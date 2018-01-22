@@ -2,19 +2,13 @@
 namespace app\test\controller;
 
 use cmf\controller\HomeBaseController;
-use map\Map;
 use think\helper\Time;
+use map\Map;
 use think\Db;
 
 /**
  * 访问记录页
- * Db::query("select * from think_user where status=1");//查询,读操作
- * Db::execute("update think_user set name='thinkphp' where status=1");//更新和写入,写操作
- * $result = Db::table('think_user')->fetchSql(true)->find(1);
- * $list = User::where('status',1)->paginate(10);
-   $this->assign('list', $list);
-   $this->assign('pager', $list->render());
- *
+ * PV(浏览次数)、VV(访问次数)、UV(独立访客)、QPS每秒查询次数、TPS(每秒事务数)
 */
 class IndexController extends HomeBaseController
 {
@@ -28,14 +22,12 @@ class IndexController extends HomeBaseController
         $limit = 50;// 列表分页数
         $userId = cmf_get_current_user_id();
         $ip = $ip = get_client_ip(0, true);
-        $time = Time::today();
         $agent = $_SERVER['HTTP_USER_AGENT'];
         $agent_md5 = md5($agent);
+        $time = Time::today();
         $visitQ = Db::name('visit_log');
 
         // 获取位置信息
-        // $ip = '223.104.18.150';
-        // $ip = '106.14.74.155';
         $ll = Map::locationByIp($ip);
         $addr = $ll[1];
 
@@ -89,6 +81,10 @@ class IndexController extends HomeBaseController
         $field = 'id,obj_type,total,ip,ipaddrVar,agent,create_time,update_time';
         // $where = ['obj_type'=>'pc'];
         $list = $visitQ->order('id DESC')->paginate($limit);
+
+        // 统计 PV(浏览次数)、VV(访问次数)、UV(独立访客)、QPS每秒查询次数、TPS(每秒事务数)
+        // $pv = $visitQ->count('total');
+        // dump($pv);
 
 
         // 模板赋值

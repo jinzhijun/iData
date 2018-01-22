@@ -94,9 +94,9 @@ class DbBackupController extends AdminBaseController
         $qb = new SqlBack();
         $result = $qb->backup();
         if ($result===false) {
-            $this->error('数据备份失败！',url('DbBackup/index'));
+            $this->error('数据备份失败！',url('index'));
         }
-        $this->success('数据备份成功',url('DbBackup/index'));
+        $this->success('数据备份成功',url('index'));
     }
     /*备份所选表的数据*/
     public function exportSelect()
@@ -119,11 +119,11 @@ class DbBackupController extends AdminBaseController
             $qb = new SqlBack();
             $result = $qb->restore($file);
             if ($result===false) {
-                $this->error('数据备份失败！',url('DbBackup/index'));
+                $this->error('数据还原失败！',url('index'));
             }
-            $this->success('数据备份成功',url('DbBackup/index'));
+            $this->success('数据还原成功',url('index'));
         } else {
-            $this->error('文件不存在！',url('DbBackup/index'));
+            $this->error('文件不存在！',url('index'));
         }
     }
 
@@ -137,7 +137,7 @@ class DbBackupController extends AdminBaseController
             $this->error('请选择备份文件！');
 
         $file = empty($param['fname'])?'':$param['fname'];
-        if ($file) {
+        if (!empty($file)) {
             if (is_file($this->dir . $file)) {
                 if (unlink($this->dir . $file)===false) {
                     $this->error('该备份删除失败！');
@@ -149,7 +149,7 @@ class DbBackupController extends AdminBaseController
 
         // 批量操作
         $files = isset($param['fnames'])?$param['fnames']:'';
-        if ($files) {
+        if (!empty($files)) {
             foreach($files as $file){
                 if (is_file($this->dir . $file)) {
                     if(unlink($this->dir . $file)===false){

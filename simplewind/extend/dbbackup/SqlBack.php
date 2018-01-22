@@ -62,8 +62,10 @@ File Encoding         : 65001
 Date: {$this->time}
 */
 EOT;
-        $end_flag = ';'. $this->eol . $this->end . $this->eol;
-        $sqldump = $this->header . $end_flag .'SET FOREIGN_KEY_CHECKS=0'. $end_flag;
+        $end_flag = $this->eol . $this->end . $this->eol;
+        $sqldump = $this->header . $end_flag;
+        $end_flag = ';'. $end_flag;
+        $sqldump .= 'SET FOREIGN_KEY_CHECKS=0'. $end_flag;
         $connect = Db::connect($this->set);
         $dbName = $connect->getConfig('database');
         $tableAll = $connect->getTables();
@@ -76,15 +78,15 @@ EOT;
 
         // 生成备份内容
         foreach ($tables as $table) {
-            $sqldump .= 'DROP TABLE IF EXISTS `'. $table . $end_flag;
+            $sqldump .= 'DROP TABLE IF EXISTS `'. $table .'`'. $end_flag;
             $sqldump .= $this->getTableStructure($table)['Create Table'] . $end_flag;
             $datas = $this->getTableData($table);
             if (!empty($datas)) {
-                $keys = $this->getIntoFields($datas);
+                // $keys = $this->getIntoFields($datas);
                 $vals = $this->getIntoFieldsVal($datas,'long');
                 // $sqldump .= "INSERT INTO `{$table}` ({$keys}) VALUES {$vals}". $end_flag;
                 // 缺省模式
-                $sqldump .= "INSERT INTO `{$table}` VALUES {$vals}". $end_flag;
+                $sqldump .= "INSERT `{$table}` VALUES {$vals}". $end_flag;
             }
         }
 // return $sqldump;
@@ -115,14 +117,15 @@ EOT;
         if (is_file($fname)) {
             $end_flag = ';'. $this->eol . $this->end . $this->eol;
             $sqldump = file_get_contents($fname);
+            // 把注释部分替换成空
+            $sqldump = preg_replace("/(?<!:)\/\/.*|\/\*(\s|.)*?\*\//", '', $sqldump);
             $query = explode($end_flag, $sqldump);
             $total = count($query)-1;
 
             // 锁定数据库，以免备份或导入时出错
             // 实际运行会报错：SQLSTATE[HY000]: General error: 2014 Cannot execute queries while other unbuffered queries are active.
             // Db::query('lock tables '. $this->set['database'] .' WRITE');
-            // $i=1 第一个下标为0，是注释需要过滤掉
-            for ($i=1; $i < $total; $i++) { 
+            for ($i=0; $i < $total; $i++) { 
                 // $result = Db::query($query[$i]);
                 $result = Db::execute($query[$i]);
                 if ($result === false) {
