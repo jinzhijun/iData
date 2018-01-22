@@ -8,7 +8,7 @@ use think\Db;
 
 /**
  * 访问记录页
- * PV(浏览次数)、VV(访问次数)、UV(独立访客)、QPS每秒查询次数、TPS(每秒事务数)
+ * PV(浏览次数)、VV(访问次数)、UV(独立访客)、QPS(每秒查询次数)、TPS(每秒事务数)
 */
 class IndexController extends HomeBaseController
 {
@@ -66,13 +66,13 @@ class IndexController extends HomeBaseController
             ];
             // $visitQ->insert($log);
             // $result = $visitQ->getLastInsID();
-            $insertId = $visitQ->insertGetId($log);
+            // $insertId = $visitQ->insertGetId($log);
         } else {
             $log = [
                 'total' => $find['total']+1,
                 'update_time' => time()
             ];
-            $result = $visitQ->where('id',$find['id'])->update($log);
+            // $result = $visitQ->where('id',$find['id'])->update($log);
         }
         $your_visit_id = empty($find['id']) ? (empty($insertId)?null:$insertId) : $find['id'];
 
@@ -82,13 +82,12 @@ class IndexController extends HomeBaseController
         // $where = ['obj_type'=>'pc'];
         $list = $visitQ->order('id DESC')->paginate($limit);
 
-        // 统计 PV(浏览次数)、VV(访问次数)、UV(独立访客)、QPS每秒查询次数、TPS(每秒事务数)
-        // $pv = $visitQ->count('total');
-        // dump($pv);
-
+        // 统计 PV(浏览次数)、VV(访问次数)、UV(独立访客)、QPS(每秒查询次数)、TPS(每秒事务数)
+        $count['pv'] = $visitQ->count('total');
 
         // 模板赋值
         $this->assign('your_visit_id', $your_visit_id);
+        $this->assign('count', $count);
         $this->assign('limit', $limit);
         $this->assign('list', $list);
         $this->assign('pager', $list->render());

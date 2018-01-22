@@ -1,0 +1,18 @@
+<div class="table-actions">
+    <!-- <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
+            data-action="{:url('AdminAnalyze/change',['db'=>'',operate'=>['is_top'=>1]])}" data-subcheck="true">星标
+    </button>
+    <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
+            data-action="{:url('AdminAnalyze/change',['db'=>'','operate'=>['is_top'=>0]])}" data-subcheck="true">取消星标
+    </button> -->
+    <!--
+    <notempty name="category">
+        <button class="btn btn-primary btn-sm js-articles-move" type="button">批量移动</button>
+    </notempty>
+    <button class="btn btn-primary btn-sm js-articles-copy" type="button">批量复制</button>
+    -->
+    <button class="btn btn-danger btn-sm js-ajax-submit" type="submit"
+            data-action="{:url('AdminAnalyze/delete')}" data-subcheck="true" data-msg="您确定删除吗？">
+        {:lang('DELETE')}
+    </button>
+</div>

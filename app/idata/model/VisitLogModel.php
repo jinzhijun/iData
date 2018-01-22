@@ -1,5 +1,5 @@
 <?php
-namespace app\lol\model;
+namespace app\idata\model;
 
 use app\idata\model\ComModel;
 
@@ -8,44 +8,41 @@ use app\idata\model\ComModel;
 * @param string $field
 * @return object $list 
 */
-class LolRegionModel extends ComModel
+class VisitLogModel extends ComModel
 {
     public function getLists($filter=[], $order='', $limit=15, $field='', $extra=[])
     {
         $field = empty($field) ? '*': $field;
-        // $join = [
-        //     ['__USER__ u', 'a.user_id = u.id']
-        // ];
 
         $where = [];
-        // $where = ['delete_time'=>0];
-        $type = empty($filter['cid']) ? '' : intval($filter['cid']);
-        if (!empty($type)) {
-            $where['nettype'] = ['like', "%$type%"];
+        if (!empty($filter['cid'])) {
+            $where['obj_type'] = ['eq', $filter['cid']];
         }
         $startTime = empty($filter['start_time']) ? 0 : strtotime($filter['start_time']);
         $endTime   = empty($filter['end_time']) ? 0 : strtotime($filter['end_time']);
         if (!empty($startTime) && !empty($endTime)) {
-            $where['published_time'] = [['>= time', $startTime], ['<= time', $endTime]];
+            $where['create_time'] = [['>= time', $startTime], ['<= time', $endTime]];
         } else {
             if (!empty($startTime)) {
-                $where['published_time'] = ['>= time', $startTime];
+                $where['create_time'] = ['>= time', $startTime];
             }
             if (!empty($endTime)) {
-                $where['published_time'] = ['<= time', $endTime];
+                $where['create_time'] = ['<= time', $endTime];
             }
+        }
+        if (!empty($filter['ip'])) {
+            $where['ip'] = trim($filter['ip']);
         }
         $keyword = empty($filter['keyword']) ? '' : trim($filter['keyword']);
         if (!empty($keyword)) {
-            $where['name'] = ['like', "%$keyword%"];
+            $where['agent|ipaddrVar'] = ['like', "%$keyword%"];
         }
         $where = array_merge($where,$extra);
 
-        $order = empty($order) ? 'list_order,published_time DESC,id DESC' : $order;
+        $order = empty($order) ? 'id DESC' : $order;
         $limit = $this->getLimitCom($limit);
 
         $list = $this->field($field)
-            // ->join($join)
             ->where($where)
             ->order($order)
             ->paginate($limit);

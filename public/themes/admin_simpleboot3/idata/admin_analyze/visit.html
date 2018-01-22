@@ -1,0 +1,112 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">所有访问记录</a></li>
+        <li><a href="{:url('AdminAnalyze/add')}">添加访问记录</a></li>
+    </ul>
+    <div >
+        <div style="margin-left: 20px;">访问统计</div>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+                <th>PV(浏览次数)</th>
+                <th>VV(访问次数)</th>
+                <th>UV(独立访客)</th>
+                <th>QPS(每秒查询次数)</th>
+                <th>TPS(每秒事务数)</th>
+                <th>平均访问量</th>
+                <th>最大次数</th>
+                <th>超过1次的访问量/次数</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{$count.pv}</td>
+                    <td>{$count.vv}</td>
+                    <td>{$count.uv}</td>
+                    <td>{$count.qps}</td>
+                    <td>{$count.tps}</td>
+                    <td>{$count.avg}</td>
+                    <td>{$count.max}</td>
+                    <td>{$count.gt1sum} / {$count.gt1count}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminAnalyze/visit')}">
+        访问记录类型:
+        <select class="form-control" name="cid" style="width:140px;">
+            <option value="">全部</option>
+            <option {$cid=='pc'?='selected'} value="pc">电脑端</option>
+            <option {$cid=='wap'?='selected'} value="wap">Wap端</option>
+            <option {$cid=='wechat'?='selected'} value="wechat">微信端</option>
+        </select> &nbsp;&nbsp;
+        创建时间:
+        <input type="text" class="form-control js-bootstrap-datetime" name="start_time"
+               value="{$start_time|default=''}"
+               style="width:140px;" autocomplete="off">-
+        <input type="text" class="form-control js-bootstrap-datetime" name="end_time"
+               value="{$end_time|default=''}"
+               style="width:140px;" autocomplete="off"> &nbsp; &nbsp;
+        IP:
+        <input type="text" class="form-control" name="ip" style="width:200px;"
+               value="{:input('request.ip/s','')}" placeholder="请输入IP...">
+        关键字:
+        <input type="text" class="form-control" name="keyword" style="width:200px;"
+               value="{$keyword|default=''}" placeholder="请输入代理、IP地址...">
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('AdminAnalyze/visit')}">清空</a>
+    </form>
+    <form class="js-ajax-form" action="" method="post">
+        <include file="admin_analyze/visit-actions"/>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+                <include file="admin_analyze/visit-th"/>
+            </thead>
+            <foreach name="list" item="vo">
+                <tr>
+                    <td>
+                        <input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]"
+                               value="{$vo.id}" title="ID:{$vo.id}">
+                    </td>
+                    <td><b>{$vo.id}</b></td>
+
+                    <td>{$vo.obj_type}</td>
+                    <td>{$vo.agent}</td>
+                    <td>{$vo.ip}</td>
+                    <td>{$vo.ipaddrVar}</td>
+
+                    <td>{$vo.total}</td>
+                    <td>
+                        {$vo.create_time?date('Y-m-d H:i',$vo.create_time):'未知'}
+                    </td>
+                    <td>
+                        {$vo.update_time?date('Y-m-d H:i',$vo.update_time):'未知'}
+                    </td>
+
+                    <td>
+                        <a href="{:url('AdminAnalyze/edit',['id'=>$vo.id])}">{:lang('EDIT')}</a> &nbsp; 
+                        <a href="{:url('AdminAnalyze/delete',['id'=>$vo.id])}" class="js-ajax-delete">{:lang('DELETE')}</a>
+                    </td>
+                </tr>
+            </foreach>
+            <tfoot>
+                <include file="admin_analyze/visit-th"/>
+            </tfoot>
+        </table>
+        <include file="admin_analyze/visit-actions"/>
+        <ul class="pagination">{$pager|default=''}</ul>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+<script type="text/javascript">
+    function reloadPage(win) {
+        win.location.reload();
+    }
+
+    $(function () {
+        setCookie("refersh_time", 0);
+    });
+</script>
+</body>
+</html>

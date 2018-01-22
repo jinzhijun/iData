@@ -37,7 +37,7 @@ class LolHeroModel extends ComModel
             }
         }
 
-        $keyword = empty($filter['keyword']) ? '' : $filter['keyword'];
+        $keyword = empty($filter['keyword']) ? '' : trim($filter['keyword']);
         if (!empty($keyword)) {
             $where['hchampion|hname|hcname|oldername'] = ['like', "%$keyword%"];
         }
