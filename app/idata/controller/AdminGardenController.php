@@ -6,6 +6,7 @@ use think\Db;
 
 /**
 * 我的数据中心
+* 只是我一个人的专区
 */
 class AdminGardenController extends AdminBaseController
 {
