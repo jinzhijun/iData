@@ -66,13 +66,13 @@ class IndexController extends HomeBaseController
             ];
             // $visitQ->insert($log);
             // $result = $visitQ->getLastInsID();
-            // $insertId = $visitQ->insertGetId($log);
+            $insertId = $visitQ->insertGetId($log);
         } else {
             $log = [
                 'total' => $find['total']+1,
                 'update_time' => time()
             ];
-            // $result = $visitQ->where('id',$find['id'])->update($log);
+            $result = $visitQ->where('id',$find['id'])->update($log);
         }
         $your_visit_id = empty($find['id']) ? (empty($insertId)?null:$insertId) : $find['id'];
 
