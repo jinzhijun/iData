@@ -67,6 +67,7 @@ class AdminHeroController extends AdminBaseController
     public function edit()
     {
         $id = $this->request->param('id',0,'intval');
+        
         $smodel = new LolHeroModel();
         $post = $smodel->getPost($id);
         $heroPosition = $smodel->getHeroPosition([1]);

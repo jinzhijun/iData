@@ -103,9 +103,21 @@ dump($list);
         return $this->fetch();
     }
 
+    public function addVisit()
+    {
+        return '待开发……';
+        return $this->fetch();
+    }
+
+    public function editVisit()
+    {
+        return '待开发……';
+        return $this->fetch();
+    }
 
 
 
+// 通用操作
     public function delete()
     {
         $param = $this->request->param();
@@ -126,24 +138,26 @@ dump($list);
             $smodel->where(['id'=>['in',$ids]])->delete();
             $this->success('删除成功！','');
         }
+        $this->error('删除失败！');
     }
 
     // 状态操作
     public function change()
     {
         $dbName = $this->request->param('db/s','');
-        $operate = $this->request->param('operate/a');
+        $operate = $this->request->param('operate/s');
+        $status = $this->request->param('status/d');
         if (empty($dbName)) {
             $this->error('数据库名丢失！');
         }
         if (empty($operate)) {
-            $this->error('操作参数丢失！');
+            $this->error('操作丢失！');
         }
 
         $smodel = Db::name($dbName);
         $ids = $this->request->param('ids/a');
         if (isset($ids)) {
-            $smodel->where(['id'=>['in',$ids]])->update($operate);
+            $smodel->where(['id'=>['in',$ids]])->update([$operate=>$status]);
             $this->success('操作成功！', '');
         }
     }

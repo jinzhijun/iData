@@ -46,13 +46,7 @@ class IndexController extends HomeBaseController
 
         // 添加访问记录
         if (empty($find)) {
-            if (cmf_is_wechat()===true) {
-                $type = 'wechat';
-            } elseif (cmf_is_mobile()===true) {
-                $type = 'wap';
-            } else {
-                $type = 'pc';
-            }
+            $type = model('idata/Com')->getAccessType();
             $log = [
                 'user_id' => $userId,
                 'obj_type' => $type,

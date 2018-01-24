@@ -1,0 +1,12 @@
+<div class="table-actions">
+    <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
+            data-action="{:url('AdminF511/change','db=idata_timeline&operate=is_star&status=1')}" data-subcheck="true">星标
+    </button>
+    <button class="btn btn-primary btn-sm js-ajax-submit" type="submit"
+            data-action="{:url('AdminF511/change','db=idata_timeline&operate=is_star&status=0')}" data-subcheck="true">取消星标
+    </button>
+    <button class="btn btn-danger btn-sm js-ajax-submit" type="submit"
+            data-action="{:url('AdminF511/delete',['db'=>'idata_timeline'])}" data-subcheck="true" data-msg="您确定删除吗？">
+        {:lang('DELETE')}
+    </button>
+</div>

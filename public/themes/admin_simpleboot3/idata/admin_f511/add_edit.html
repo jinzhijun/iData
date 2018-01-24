@@ -1,0 +1,143 @@
+
+<div class="row">
+    <div class="col-md-9">
+        <table class="table table-bordered">
+            <tr>
+                <th width="10%" align="right">标题<span class="form-required">*</span></th>
+                <td width="47%">
+                    <input class="form-control" type="text" name="post[name]" value="{$post.name|default=''}" placeholder="" required>
+                </td>
+                <th width="8%" align="right">访问类型</th>
+                <td width="35%">
+                    <input class="form-control" style="width:200px" type="text" name="post[access_type]" value="{$post.access_type|default=''}" readonly>
+                    <p class="help-block">访问类型：pc电脑 wap移动 wechat微信</p>
+                </td>
+            </tr>
+            <tr>
+                <th>昵称</th>
+                <td>
+                    <input class="form-control" type="text" name="post[nickname]" value="{$post.nickname|default=''}" placeholder=""/>
+                </td>
+                <th>性别</th>
+                <php>$sex = empty($post['sex']) ? 0 : $post['sex'] ;</php>
+                <td>
+                    <select class="form-control" style="width:100px" name="post[sex]">
+                        <option {$sex==0?='selected'} value="0">-- 未知 --</option>
+                        <option {$sex==1?='selected'} value="1">-- 男 --</option>
+                        <option {$sex==2?='selected'} value="2">-- 女 --</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>视频</th>
+                <td>
+                    <video class="form-control" src="{$post.video|default=''}"  controls></video>
+                </td>
+                <th>声音</th>
+                <td>
+                    <audio class="form-control" src="{$post.sound|default=''}"  controls></audio>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <th width="100">文件</th>
+                <td>
+                    <input class="form-control" type="file" name="post[file]" value="{$post.file|default=''}">
+                </td>
+            </tr>
+            <tr>
+                <th>描述</th>
+                <td>
+                    <textarea class="form-control" name="post[description]" style="height:50px;" placeholder="请填写描述">{$post.description|default=''}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>内容</th>
+                <td>
+                    <script type="text/plain" id="content" name="post[content]">{$post.content|default=''}</script>
+                </td>
+            </tr>
+            <tr>
+                <th>相册</th>
+                <td>
+                    <ul id="photos" class="pic-list list-unstyled form-inline">
+                        <notempty name="post.more.photos">
+                        <foreach name="post.more.photos" item="vo">
+                            <li id="saved-image{$key}">
+                                <input id="photo-{$key}" type="hidden" name="photo[urls][]"
+                                       value="{$vo.url}">
+                                <input class="form-control" id="photo-{$key}-name" type="text"
+                                       name="photo[names][]"
+                                       value="{$vo.name|default=''}" style="width: 200px;" title="图片名称">
+                                <img id="photo-{$key}-preview"
+                                     src="{:cmf_get_image_preview_url($vo['url'])}"
+                                     style="height:36px;width: 36px;"
+                                     onclick="parent.imagePreviewDialog(this.src);">
+                                <a href="javascript:uploadOneImage('图片上传','#photo-{$key}');">替换</a>
+                                <a href="javascript:(function(){$('#saved-image{$key}').remove();})();">移除</a>
+                            </li>
+                        </foreach>
+                        </notempty>
+                    </ul>
+                    <a href="javascript:uploadMultiImage('图片上传','#photos','photos-item-tpl');"
+                       class="btn btn-sm btn-default">选择图片</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-3">
+        <table class="table table-bordered">
+            <tr>
+                <th width="100">IP地址</th>
+                <td>
+                    <input class="form-control" type="text" name="post[ip]" value="{$post.ip|default=''}">
+                </td>
+            </tr>
+
+            <tr>
+                <th>时间线</th>
+                <td>
+                    <input class="form-control js-bootstrap-datetime" type="text" name="post[line_time]" value="{$post.line_time?=date('Y-m-d H:i',$post.line_time)}">
+                </td>
+            </tr>
+            <tr>
+                <th>创建时间</th>
+                <td>
+                    <input class="form-control" type="text" value="{$post.create_time?=date('Y-m-d H:i',$post.create_time)}">
+                </td>
+            </tr>
+            <tr>
+                <th>更新时间</th>
+                <td>
+                    <input class="form-control" type="text" value="{$post.update_time?=date('Y-m-d H:i',$post.update_time)}">
+                </td>
+            </tr>
+            <tr>
+                <th>修改次数</th>
+                <td><input style="width:80px" type="number" name="post[modtimes]" value="{$post.modtimes|default='0'}"> 次</td>
+            </tr>
+
+            <tr>
+                <th><b>状态</b></th>
+            </tr>
+            <tr>
+                <th>星标</th>
+                <td>
+                    <input style="width:80px" type="number" name="post[is_star]" value="{$post.is_star|default='0'}">级
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <php>$status = empty($post['status']) ? 0 : $post['status'] ;</php>
+                <td>
+                    <div class="checkbox">
+                        <label><input type="radio" name="post[status]" value="1" {$status==1?='checked'}>显示</label>
+                        <label><input type="radio" name="post[status]" value="0" {$status==0?='checked'}>隐藏</label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

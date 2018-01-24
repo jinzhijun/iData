@@ -28,6 +28,7 @@ class ComModel extends Model
     // 自动完成
     public function setPublishedTimeAttr($value){ return strtotime($value); }
     public function setSTimeAttr($value){ return strtotime($value); }
+    public function setLneTimeAttr($value){ return strtotime($value); }
 
 
     // 添加数据
@@ -92,11 +93,29 @@ class ComModel extends Model
         return empty($limit) ? config('progress_bar')['max'] : $limit;
     }
 
+    // 获取用户终端访问类型
+    public function getAccessType($type='')
+    {
+        if (cmf_is_wechat()===true) {
+            $tp = 'wechat';
+        } elseif (cmf_is_mobile()===true) {
+            $tp = 'wap';
+        } else {
+            $tp = 'pc';
+        }
+        return empty($type) ? $tp : $type;
+    }
+
     // 处理用户名 user_nickname|user_login|user_email|mobile
     public function getUsername($data=[])
     {
         $username = empty($data['user_nickname']) ? (empty($data['user_login']) ? (empty($data['mobile']) ? $data['user_email'] : $data['mobile']) : $data['user_login']) : $data['user_nickname'];
         return $username;
+    }
+    // 从用户名获取用户ID  唯一性检测
+    public function getUidByName($data=[])
+    {
+        return true;
     }
 
     // 状态
