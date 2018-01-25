@@ -28,18 +28,29 @@
             <foreach name="list" item="vo">
             <div class="history-date">
                 <ul>
-                    <h2 class="{$key?'date02':'first'}"><a href="#nogo">{$vo.year}年</a></h2>
-                    <foreach name="vo.data" item="child">
-                    <li class="{$child.is_star?='green'}">
-                        <h3>{:date('m.d',$child.line_time)}<span>{$vo.year}</span></h3>
-                        <dl>
-                            <dt>
-                                {$child.name}
-                                <span>{$child.description}</span>
-                            </dt>
-                        </dl>
-                    </li>
+                    <h2 class="{$key?'date02':'first'}" onclick="addTime('{:url(\'addTimeline\')}')">
+                        <a href="#nogo">{$vo.year}年</a>
+                    </h2>
+                    <notempty name="vo.id">
+                    <php>
+                        $ids = explode(',',$vo['id']);
+                        $names = explode(',',$vo['name']);
+                        $descs = explode(',',$vo['description']);
+                        $times = explode(',',$vo['line_time']);
+                        $stars = explode(',',$vo['is_star']);
+                    </php>
+                    <foreach name="ids" item="id">
+                        <li class="{$stars[$key]?='green'}">
+                            <h3>{:date('m.d',$times[$key])}<span>{$vo.year}</span></h3>
+                            <dl>
+                                <dt>
+                                    <a onclick="editTime('{:url(\'editTimeline\',[\'id\'=>$id])}')" href="javascript:void(0);" >{$names[$key]}</a>
+                                    <span>{$descs[$key]}</span>
+                                </dt>
+                            </dl>
+                        </li>
                     </foreach>
+                    </notempty>
                 </ul>
             </div>
             </foreach>
@@ -47,5 +58,13 @@
     </div>
 
     <script src="__TMPL__/idata/f511/timeline/main/main.js"></script>
+    <script type="text/javascript">
+        function addTime(u) {
+            location.href = u;
+        }
+        function editTime(u) {
+            window.location.href = u;
+        }
+    </script>
 </body>
 </html>

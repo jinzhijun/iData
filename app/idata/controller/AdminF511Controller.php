@@ -39,7 +39,7 @@ class AdminF511Controller extends AdminBaseController
         // $nowTime = Time::tranTime('2018-01-22');
         // $nowTime = Time::tranTime(time());
         $visitQ = new IdataTimelineModel();
-        $order = 'line_time DESC';
+        $order = 'line_time DESC,create_time DESC';
         $limit = 30;// 列表分页数
         $field = 'id,access_type,name,nickname,sex,description,line_time,create_time,update_time,modtimes,is_star,status';
         $extra = [];
@@ -108,6 +108,7 @@ class AdminF511Controller extends AdminBaseController
             $post['more']['files'] = $smodel->dealFiles($data['file']);
         }
 
+        $post['year'] = empty($post['line_time']) ? '0' : gmdate('Y',strtotime($post['line_time']));
         $post['access_type'] = empty($post['access_type']) ? $smodel->getAccessType() : $post['access_type'];
         $post['ip'] = empty($post['ip']) ? get_client_ip() : $post['ip'];
 
