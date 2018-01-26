@@ -30,84 +30,28 @@ class F511Controller extends HomeBaseController
 
         $sModel = new IdataTimelineModel();
         $sQuery = Db::name('idata_timeline');
-
         $field = 'id,year,name,description,line_time,is_star';
 
-        // group() having()
-        // 第一步：按年份分组 ->group()
-        // 第二步：查找每年的数据 ->having()
-
-        // $list = $sModel->field($field)->group('year')->having('id<5')->select()->toArray();
-
-        // 原生 GROUP BY year WITH rollup
-        $list = $sQuery->query("SELECT year,group_concat(id) AS id,group_concat(name) AS name,group_concat(description) AS description,group_concat(line_time) AS line_time,group_concat(is_star) AS is_star FROM `cmf_idata_timeline` GROUP BY `year` ORDER BY `line_time` DESC");
-        // dump($list);die;
-
-
-
-
+        /**
+         * 模型解决
+         * 
+         * group() having()
+         * 第一步：按年份分组 ->group()
+         * 第二步：查找每年的数据 ->having()
+         */
         // $filter = ['status'=>1];
         // $list = $sModel->getLists($filter,'line_time DESC',99);
+        // $list = $sModel->field($field)->group('year')->having('id<5')->select()->toArray();
         // $this->assign('list',$list->items());
         // $data->appends($filter);
         // $this->assign('pager',$list->render());
 
+        /**
+         * 原生 GROUP BY year WITH rollup
+         */
+        $list = $sQuery->query("SELECT year,group_concat(id) AS id,group_concat(name) AS name,group_concat(description) AS description,group_concat(line_time) AS line_time,group_concat(is_star) AS is_star FROM `cmf_idata_timeline` WHERE `status`=1 GROUP BY `year` ORDER BY `line_time` DESC");
+        // dump($list);die;
 
-
-        // 模拟数据
-        $list2 = [
-            [
-                'year' => 2018,
-                'data' => [
-                    [
-                        'is_star'=>1,
-                        'line_time'=>strtotime('2018-01-23'),
-                        'name'=>'标题：',
-                        'description'=>'描述：一开始压根就没想过找对象，但想过以后要找一个什么样的对象。<br>不论从前，只谈现在：与我而言，你是特别的唯一的也是世间独一无二的。'
-                    ],
-                    [
-                        'is_star'=>0,
-                        'line_time'=>strtotime('2018-01-22'),
-                        'name'=>'标题：头发的故事',
-                        'description'=>'描述：不许乱摸！'
-                    ],
-                    [
-                        'is_star'=>1,
-                        'line_time'=>strtotime('2018-01-03'),
-                        'name'=>'标题：新的开始',
-                        'description'=>'描述：电影很好看。'
-                    ],
-                    [
-                        'is_star'=>0,
-                        'line_time'=>strtotime('2018-01-01'),
-                        'name'=>'标题：元旦快乐！',
-                        'description'=>'描述：'
-                    ],
-                ],
-            ],
-            [
-                'year' => 2017,
-                'data' => [
-                    [
-                        'is_star'=>0,
-                        'line_time'=>strtotime('2017-05-30'),
-                        'name'=>'标题：初遇',
-                        'description'=>'描述：'
-                    ],
-                ],
-            ],
-            [
-                'year' => 2016,
-                'data' => [
-                    [
-                        'is_star'=>0,
-                        'line_time'=>strtotime('2016-12-31'),
-                        'name'=>'标题：16年最后一天',
-                        'description'=>'描述：'
-                    ],
-                ],
-            ],
-        ];
 
 
         $this->assign('list',$list);
@@ -187,5 +131,63 @@ class F511Controller extends HomeBaseController
     public function express()
     {
         return $this->fetch();
+    }
+
+    public function more()
+    {
+        // 模拟数据
+        $list2 = [
+            [
+                'year' => 2018,
+                'data' => [
+                    [
+                        'is_star'=>1,
+                        'line_time'=>strtotime('2018-01-23'),
+                        'name'=>'标题：1',
+                        'description'=>'描述：'
+                    ],
+                    [
+                        'is_star'=>0,
+                        'line_time'=>strtotime('2018-01-22'),
+                        'name'=>'标题：2',
+                        'description'=>'描述：不许乱摸！'
+                    ],
+                    [
+                        'is_star'=>1,
+                        'line_time'=>strtotime('2018-01-03'),
+                        'name'=>'标题：3',
+                        'description'=>'描述：电影很好看。'
+                    ],
+                    [
+                        'is_star'=>0,
+                        'line_time'=>strtotime('2018-01-01'),
+                        'name'=>'标题：元旦快乐！',
+                        'description'=>'描述：元旦快乐！'
+                    ],
+                ],
+            ],
+            [
+                'year' => 2017,
+                'data' => [
+                    [
+                        'is_star'=>0,
+                        'line_time'=>strtotime('2017-05-30'),
+                        'name'=>'标题：初遇',
+                        'description'=>'描述：'
+                    ],
+                ],
+            ],
+            [
+                'year' => 2016,
+                'data' => [
+                    [
+                        'is_star'=>0,
+                        'line_time'=>strtotime('2016-12-31'),
+                        'name'=>'标题：16年最后一天',
+                        'description'=>'描述：'
+                    ],
+                ],
+            ],
+        ];
     }
 }

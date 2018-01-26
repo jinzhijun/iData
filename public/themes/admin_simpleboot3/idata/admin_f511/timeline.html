@@ -46,11 +46,12 @@
 
                     <td>{$vo.access_type}</td>
                     <td>{$vo.name}</td>
+                    <td>{$vo.description|mb_substr=0,20,'utf-8'}</td>
+                    
                     <td>{$vo.nickname}</td>
                     <td>
                         <switch name="vo.sex"><case value="1">男</case><case value="2">女</case><default/>未知</switch>
                     </td>
-                    <td>{$vo.description}</td>
 
                     <td>
                         {$vo.line_time?date('Y-m-d H:i',$vo.line_time):'时间去哪了？'}
@@ -62,8 +63,14 @@
                         {$vo.update_time?date('Y-m-d H:i',$vo.update_time):'神不知鬼不觉'}
                     </td>
                     <td>{$vo.modtimes} 次</td>
+
+                    <td>{$vo.is_star} 级</td>
                     <td>
-                        <switch name="vo.status"><case value="-1">封存</case><case value="0">隐藏</case><default/>显示</switch>
+                        <switch name="vo.status">
+                            <case value="-1"><a style="color:#FF8000">封存</a></case>
+                            <case value="0"><a style="color:#F00" data-toggle="tooltip" title="隐藏"><i class="fa fa-close"></i></a></case>
+                            <default/><a data-toggle="tooltip" title="显示"><i class="fa fa-check"></i></a>
+                        </switch>
                     </td>
 
                     <td>

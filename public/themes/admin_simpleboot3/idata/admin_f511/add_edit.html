@@ -118,18 +118,15 @@
                 <th>修改次数</th>
                 <td><input style="width:80px" type="number" name="post[modtimes]" value="{$post.modtimes|default='0'}"> 次</td>
             </tr>
-
-            <tr>
-                <th><b>状态</b></th>
-            </tr>
             <tr>
                 <th>星标</th>
                 <td>
                     <input style="width:80px" type="number" name="post[is_star]" value="{$post.is_star|default='0'}">级
                 </td>
             </tr>
+
             <tr>
-                <th></th>
+                <th><b>状态</b></th>
                 <php>$status = isset($post['status']) ? $post['status'] : '';</php>
                 <td>
                     <div class="checkbox">
