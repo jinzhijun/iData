@@ -29,18 +29,25 @@ class F511Controller extends HomeBaseController
         // return '时光轴：'. $nowTime;
 
         $sModel = new IdataTimelineModel();
+        $sQuery = Db::name('idata_timeline');
+
+        $field = 'id,year,name,description,line_time,is_star';
 
         // group() having()
-        // 第一步：按年份分组
-        // 第二步：查找每年的数据
-        // $list = $sModel->group()->having()->select();
+        // 第一步：按年份分组 ->group()
+        // 第二步：查找每年的数据 ->having()
+
+        // $list = $sModel->field($field)->group('year')->having('id<5')->select()->toArray();
+
+        // 原生 GROUP BY year WITH rollup
+        $list = $sQuery->query("SELECT year,group_concat(id) AS id,group_concat(name) AS name,group_concat(description) AS description,group_concat(line_time) AS line_time,group_concat(is_star) AS is_star FROM `cmf_idata_timeline` GROUP BY `year` ORDER BY `line_time` DESC");
+        // dump($list);die;
 
 
 
 
         // $filter = ['status'=>1];
         // $list = $sModel->getLists($filter,'line_time DESC',99);
-
         // $this->assign('list',$list->items());
         // $data->appends($filter);
         // $this->assign('pager',$list->render());
@@ -48,7 +55,7 @@ class F511Controller extends HomeBaseController
 
 
         // 模拟数据
-        $list = [
+        $list2 = [
             [
                 'year' => 2018,
                 'data' => [
@@ -101,13 +108,74 @@ class F511Controller extends HomeBaseController
                 ],
             ],
         ];
+
+
         $this->assign('list',$list);
-
-
-
 
         return $this->fetch();
     }
+
+    public function addTimeline()
+    {
+        return '新增 - 待开发';
+        return $this->fetch();
+    }
+    public function addTimelinePost()
+    {
+        $smodel = new IdataTimelineModel();
+        $post = $this->op();
+        $post['create_time'] = time();
+
+        $smodel->insertData($post);
+
+        $this->success('提交成功',url('AdminF511/editTimeline',['id'=>$smodel->id]));
+    }
+
+    public function editTimeline()
+    {
+        return '编辑 - 待开发';
+        $id = $this->request->param('id',0,'intval');
+        
+        $smodel = new IdataTimelineModel();
+        $post = $smodel->getPost($id);
+
+        $this->assign('post',$post);
+        return $this->fetch();
+    }
+    public function editTimelinePost()
+    {
+        $smodel = new IdataTimelineModel();
+        $post = $this->op();
+        $post['update_time'] = time();
+        $post['modtimes'] = $post['modtimes']+1;
+
+        $smodel->updateData($post);
+
+        $this->success('编辑成功');
+    }
+    public function op()
+    {
+        $data = $this->request->param();
+        $post = $data['post'];
+
+        $smodel = new IdataTimelineModel();
+        if (!empty($data['photo'])) {
+            $post['more']['photos'] = $smodel->dealFiles($data['photo']);
+        }
+        if (!empty($data['file'])) {
+            $post['more']['files'] = $smodel->dealFiles($data['file']);
+        }
+
+        $post['year'] = empty($post['line_time']) ? '0' : gmdate('Y',strtotime($post['line_time']));
+        $post['access_type'] = empty($post['access_type']) ? $smodel->getAccessType() : $post['access_type'];
+        $post['ip'] = empty($post['ip']) ? get_client_ip() : $post['ip'];
+
+        return $post;
+    }
+
+
+
+
 
     // html5唯美爱情表白动画网页代码
     public function renxi()

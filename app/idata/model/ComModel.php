@@ -28,7 +28,7 @@ class ComModel extends Model
     // 自动完成
     public function setPublishedTimeAttr($value){ return strtotime($value); }
     public function setSTimeAttr($value){ return strtotime($value); }
-    public function setLneTimeAttr($value){ return strtotime($value); }
+    public function setLineTimeAttr($value){ return strtotime($value); }
 
 
     // 添加数据

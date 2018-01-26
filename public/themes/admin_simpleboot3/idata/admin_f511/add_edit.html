@@ -99,7 +99,7 @@
             <tr>
                 <th>时间线</th>
                 <td>
-                    <input class="form-control js-bootstrap-datetime" type="text" name="post[line_time]" value="{$post.line_time?=date('Y-m-d H:i',$post.line_time)}">
+                    <input class="form-control js-bootstrap-datetime" type="text" name="post[line_time]" value="{$post.line_time?date('Y-m-d H:i',$post.line_time):date('Y-m-d H:i',time())}">
                 </td>
             </tr>
             <tr>
@@ -130,11 +130,11 @@
             </tr>
             <tr>
                 <th></th>
-                <php>$status = empty($post['status']) ? 0 : $post['status'] ;</php>
+                <php>$status = isset($post['status']) ? $post['status'] : '';</php>
                 <td>
                     <div class="checkbox">
-                        <label><input type="radio" name="post[status]" value="1" {$status==1?='checked'}>显示</label>
-                        <label><input type="radio" name="post[status]" value="0" {$status==0?='checked'}>隐藏</label>
+                        <label><input type="radio" name="post[status]" value="1" {$status===1?='checked'}>显示</label>
+                        <label><input type="radio" name="post[status]" value="0" {$status===0?='checked'}>隐藏</label>
                     </div>
                 </td>
             </tr>
