@@ -112,10 +112,18 @@ class ComModel extends Model
         $username = empty($data['user_nickname']) ? (empty($data['user_login']) ? (empty($data['mobile']) ? $data['user_email'] : $data['mobile']) : $data['user_login']) : $data['user_nickname'];
         return $username;
     }
-    // 从用户名获取用户ID  唯一性检测
-    public function getUidByName($data=[])
+    // 从用户信息获取用户ID  唯一性检测
+    public function getUidByName($uname='')
     {
-        return true;
+        if (empty($uname)) return false;
+        $uid = intval($uname);
+        if (empty($uid)) {
+            $uid = Db::name('user')->whereOr(['user_nickname|user_login|user_email|mobile'=>$uname])->value('id');
+            // $uid = Db::name('user')->whereOr(['user_nickname|user_login|user_email|mobile'=>['eq',$uname]])->value('id');
+            // $uid = Db::name('user')->whereOr(['user_nickname|user_login|user_email|mobile'=>['like', "%$uname%"]])->value('id');
+            $uid = intval($uid);
+        }
+        return $uid;
     }
 
     // 状态
