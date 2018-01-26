@@ -39,17 +39,30 @@ class F511Controller extends HomeBaseController
          * 第一步：按年份分组 ->group()
          * 第二步：查找每年的数据 ->having()
          */
-        // $filter = ['status'=>1];
+        $filter = ['status'=>1];
+        // 不分
         // $list = $sModel->getLists($filter,'line_time DESC',99);
+        // 分组
         // $list = $sModel->field($field)->group('year')->having('id<5')->select()->toArray();
+        // 模拟
+        $list2 = $sQuery->field($field)->where($filter)->order('line_time DESC')->select();
+        foreach ($list2 as $key => $row) {
+            $list[$row['year']][] = $row; 
+        }
+        // dump($list);die;
+
         // $this->assign('list',$list->items());
         // $data->appends($filter);
         // $this->assign('pager',$list->render());
 
+
+
         /**
-         * 原生 GROUP BY year WITH rollup
+         * 原生orgin
+         * 分组 GROUP BY year WITH rollup
+         * 无法正确 line_time 排序
          */
-        $list = $sQuery->query("SELECT year,group_concat(id) AS id,group_concat(name) AS name,group_concat(description) AS description,group_concat(line_time) AS line_time,group_concat(is_star) AS is_star FROM `cmf_idata_timeline` WHERE `status`=1 GROUP BY `year` ORDER BY `line_time` DESC");
+        // $list = $sQuery->query("SELECT year,group_concat(id) AS id,group_concat(name) AS name,group_concat(description) AS description,group_concat(line_time) AS line_time,group_concat(is_star) AS is_star FROM `cmf_idata_timeline` WHERE `status`=1 GROUP BY `year` ORDER BY `line_time` DESC");
         // dump($list);die;
 
 

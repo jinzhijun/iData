@@ -25,28 +25,35 @@
     <!-- 主体 -->
     <div class="main">
         <div class="history">
-            <notempty name="list">
             <foreach name="list" item="vo">
             <div class="history-date">
                 <ul>
-                    <h2 class="{$key==2018?'first':'date02'}" onclick="addTime('{:url(\'addTimeline\')}')">
-                        <a href="#nogo">{$key}年</a>
+                    <h2 class="{$key?'date02':'first'}" onclick="addTime('{:url(\'addTimeline\')}')">
+                        <a href="#nogo">{$vo.year}年</a>
                     </h2>
-                    <foreach name="list[$key]" item="t">
-                        <li class="{$t.is_star?='green'}">
-                            <h3>{:date('m.d',$t.line_time)}<span>{$t.year}</span></h3>
+                    <notempty name="vo.id">
+                    <php>
+                        $ids = explode(',',$vo['id']);
+                        $names = explode(',',$vo['name']);
+                        $descs = explode(',',$vo['description']);
+                        $times = explode(',',$vo['line_time']);
+                        $stars = explode(',',$vo['is_star']);
+                    </php>
+                    <foreach name="ids" item="id">
+                        <li class="{$stars[$key]?='green'}">
+                            <h3>{:date('m.d',$times[$key])}<span>{$vo.year}</span></h3>
                             <dl>
                                 <dt>
-                                    <a onclick="editTime('{:url(\'editTimeline\',[\'id\'=>$t.id])}')" href="javascript:void(0);" >{$t.name}</a>
-                                    <span>{$t.description}</span>
+                                    <a onclick="editTime('{:url(\'editTimeline\',[\'id\'=>$id])}')" href="javascript:void(0);" >{$names[$key]}</a>
+                                    <span>{$descs[$key]}</span>
                                 </dt>
                             </dl>
                         </li>
                     </foreach>
+                    </notempty>
                 </ul>
             </div>
             </foreach>
-            </notempty>
         </div>
     </div>
 
